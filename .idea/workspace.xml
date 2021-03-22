@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1q4O8u0WHYI9CNWcTJxNsizTPmt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.全局.GOPATH.is.expanded" value="true" />
+    <property name="configurable.模块.GOPATH.is.expanded" value="false" />
+    <property name="configurable.项目.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/conf" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/conf" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_build/conf" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go 构建.go build main.go">
+    <configuration name="go build 遍历结构体并赋值.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/example/遍历结构体并赋值.go" />
+      <package value="github.com/mengzushan/bups" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/_build" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="github.com/mengzushan/bups" />
+      <directory value="$PROJECT_DIR$" />
+      <output_directory value="$PROJECT_DIR$/_build" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build 写入toml配置.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/_build" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/example/写入toml配置.go" />
+      <package value="github.com/mengzushan/bups" />
+      <directory value="$PROJECT_DIR$" />
+      <output_directory value="$PROJECT_DIR$/_build" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go 构建.go build main.go" />
+      <item itemvalue="Go 构建.go build 写入toml配置.go" />
+      <item itemvalue="Go 构建.go build 遍历结构体并赋值.go" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go 构建.go build main.go" />
+        <item itemvalue="Go 构建.go build 写入toml配置.go" />
+        <item itemvalue="Go 构建.go build 遍历结构体并赋值.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="442" y="213" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616424393783">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state x="441" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616419643325" />
+    <state x="442" y="213" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616424393783" />
+    <state x="785" y="356" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616339390663">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state x="785" y="356" key="#com.intellij.fileTypes.FileTypeChooser/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616339390663" />
+    <state x="765" y="262" key="#com.intellij.ide.util.MemberChooser" timestamp="1616348977870">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state x="765" y="262" key="#com.intellij.ide.util.MemberChooser/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616348977870" />
+    <state width="1845" height="288" key="GridCell.Tab.0.bottom" timestamp="1616425277053">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state width="1845" height="288" key="GridCell.Tab.0.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616419366122" />
+    <state width="1845" height="288" key="GridCell.Tab.0.bottom/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616425277053" />
+    <state width="1845" height="288" key="GridCell.Tab.0.center" timestamp="1616425277052">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state width="1845" height="288" key="GridCell.Tab.0.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616419366121" />
+    <state width="1845" height="288" key="GridCell.Tab.0.center/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616425277052" />
+    <state width="1845" height="288" key="GridCell.Tab.0.left" timestamp="1616425277052">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state width="1845" height="288" key="GridCell.Tab.0.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616419366121" />
+    <state width="1845" height="288" key="GridCell.Tab.0.left/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616425277052" />
+    <state width="1845" height="288" key="GridCell.Tab.0.right" timestamp="1616425277053">
+      <screen x="36" y="23" width="1884" height="1057" />
+    </state>
+    <state width="1845" height="288" key="GridCell.Tab.0.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616419366122" />
+    <state width="1845" height="288" key="GridCell.Tab.0.right/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616425277053" />
+    <state width="1845" height="355" key="GridCell.Tab.1.bottom" timestamp="1616413531223">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state width="1845" height="355" key="GridCell.Tab.1.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616413531223" />
+    <state width="1845" height="355" key="GridCell.Tab.1.center" timestamp="1616413531223">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state width="1845" height="355" key="GridCell.Tab.1.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616413531223" />
+    <state width="1845" height="355" key="GridCell.Tab.1.left" timestamp="1616413531223">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state width="1845" height="355" key="GridCell.Tab.1.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616413531223" />
+    <state width="1845" height="355" key="GridCell.Tab.1.right" timestamp="1616413531223">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state width="1845" height="355" key="GridCell.Tab.1.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616413531223" />
+    <state x="509" y="190" key="SettingsEditor" timestamp="1616340904849">
+      <screen x="35" y="23" width="1885" height="1057" />
+    </state>
+    <state x="509" y="190" key="SettingsEditor/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616340904849" />
+  </component>
+</project>
