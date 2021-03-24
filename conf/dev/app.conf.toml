@@ -1,36 +1,39 @@
-cloud_api = "COS" # COS / qiniu
-save_name = "myweb"
-save_time = 3600
-save_time_pass = 72400
+cloud_api = "COS"
+save_name = "host"
+save_time = 360
+save_time_pass = 7240
 
 [bucket]
-    bucket_url = ""
-    secretid = ""
-    secretkey = ""
-    token = ""
+bucket_url = ""
+secretid = ""
+secretkey = ""
+token = ""
 
 [database]
-    ipaddr = ""
-    port = ""
-    db_name = ""
-    db_name2 = ""
+ipaddr = "127.0.0.1"
+port = "3306"
+user_name = ""
+user_passwd = ""
+db_name = "godb"
+db_name2 = "typecho"
 
 [local]
-    web = ""
-    static = ""
-    log = ""
+web = ""
+static = ""
+log = ""
 
 [web_config]
-    switch = "" # 是否打开web配置
-    ipaddr = ""
-    port = ""
-    user_name = ""
-    user_passwd = ""
+switch = "off"
+ipaddr = "127.0.0.1"
+port = ":8080"
+user_name = "admin"
+user_passwd = "admin"
 
 [encryption]
-    switch = ""
-    encrypt_mode = ""
-    [rsa]
-        pub_key = ""
-        pri_key = ""
-    aes = ""
+switch = "off"
+encrypt_mode = "rsa"
+aes = ""
+
+[rsa]
+pub_key = "123"
+pri_key = "123"
