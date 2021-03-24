@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mengzushan/bups/app"
 	"github.com/mengzushan/bups/utils"
 	"github.com/mengzushan/bups/web"
 	"time"
@@ -14,6 +15,10 @@ func main() {
 		if conf.WebConfig.Switch == "on" {
 			web.Run()
 		}
+	}()
+	go func() {
+		app.BackUpForFile()
+		app.BackUpForDb()
 	}()
 	for {
 		time.Sleep(time.Second * 1)
