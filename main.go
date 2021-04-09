@@ -17,7 +17,9 @@ func main() {
 		}
 	}()
 	go func() {
+		_ = app.CreateSqlFileZip()
 		app.BackUpForFile()
+		app.ReadZipFile()
 		app.BackUpForDb()
 	}()
 	for {
