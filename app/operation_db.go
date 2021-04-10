@@ -47,28 +47,33 @@ func BackUpForDb() {
 }
 
 func CreateSqlFileZip() error {
-	// 创建sql文件的压缩包
+	/*
+		重写创建压缩包的逻辑
+	*/
+	// 读取配置文件
 	conf := utils.GetConfig()
-	file, err := os.Open(filepath.FromSlash("./cache/backup/" + conf.Database.DbName + ".sql"))
-	defer func() {
-		// 关闭并删除源sql文件
-		_ = file.Close()
-		_ = os.RemoveAll("./cache/backup/" + conf.Database.DbName + ".sql")
-	}()
+	// 创建日志器
+	log := logger.Std()
+	defer log.Close()
+	// 创建带缓存的字节流
+	path := "./cache/backup/"
+	buf, _ := os.Create(path + conf.Database.DbName + ".zip")
+	// 创建一个写入器
+	write := zip.NewWriter(buf)
+	defer write.Close()
+	// 通过元数据访问文件
+	fs, _ := os.Stat(path + conf.Database.DbName + ".sql")
+	f,err := write.Create(fs.Name())
 	if err != nil {
-		return err
+		log.StdErrorLog(err.Error())
+		panic(err)
 	}
-	// 创建zip文件
-	zipFile, _ := os.Create(filepath.FromSlash("./cache/backup/" + conf.Database.DbName + ".zip"))
-	// 创建zip写入器
-	archive := zip.NewWriter(zipFile)
-	// 写入文件头信息
-	info,err := os.Stat(filepath.FromSlash("./cache/backup/" + conf.Database.DbName + ".sql"))
-	header, _ := zip.FileInfoHeader(info)
-	//path := filepath.FromSlash("./cache/" + conf.Database.DbName + ".sql")
-	header.Name = "/"
-	header.Method = zip.Deflate
-	writer,err := archive.CreateHeader(header)
-	_, _ = io.Copy(writer, zipFile)
+	// 打开文件
+	file, err := os.Open(path + fs.Name())
+	if err != nil {
+		log.StdErrorLog(err.Error())
+		panic(err)
+	}
+	_, _ = io.Copy(f, file)
 	return nil
 }

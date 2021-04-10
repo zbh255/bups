@@ -42,7 +42,7 @@ func (l *Logger) Close() {
 
 func Std() *Logger {
 	pathHead, _ := os.Getwd()
-	file, _ := os.Create(pathHead + filepath.FromSlash("/log/app.log"))
+	file, _ := os.Open(pathHead + filepath.FromSlash("/log/app.log"))
 	l := log.New(file, "", log.Lshortfile)
 	l.SetFlags(log.LstdFlags)
 	return &Logger{

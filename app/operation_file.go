@@ -1,11 +1,13 @@
 package app
 
 import (
+	"archive/zip"
 	"encoding/json"
-	"github.com/alexmullins/zip"
+	"fmt"
 	"github.com/mengzushan/bups/common/logger"
 	"github.com/mengzushan/bups/utils"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -59,59 +61,134 @@ func BackUpForFile() {
 		log.StdInfoLog("Json配置文件写入失败")
 	}
 	if conf.Local.Web != "" {
-		CreateZip(conf.Local.Web, "web.zip")
+		//CreateZip(conf.Local.Web, "web.zip")
+		_ = Zip(conf.Local.Web, "web.zip")
 	}
 	if conf.Local.Static != "" {
-		CreateZip(conf.Local.Static, "static.zip")
+		//CreateZip(conf.Local.Static, "static.zip")
+		_ = Zip(conf.Local.Static, "static.zip")
 	}
 	if conf.Local.Log != "" {
-		CreateZip(conf.Local.Log, "log.zip")
+		_ = Zip(conf.Local.Log, "log.zip")
 	}
 }
 
 func CreateZip(srcPath string, createName string) {
 	// 创建待写入的压缩文件
-	file, err := os.Create(filepath.FromSlash("./cache/backup/") + createName)
+	//p,_ := os.Getwd()
+	pathPrefix := "./cache/backup/"
+	zipfile, err := os.Create(filepath.FromSlash(pathPrefix + createName))
+	defer zipfile.Close()
+	println(createName)
 	if err != nil {
 		log := logger.Std()
-		log.StdErrorLog("文件创建失败" + filepath.FromSlash("./cache/backup/"+createName))
+		log.StdErrorLog("文件创建失败" + filepath.FromSlash(pathPrefix + createName))
 		panic(err)
 	}
 	// 创建压缩包流
-	zipFile := zip.NewWriter(file)
+	archive := zip.NewWriter(zipfile)
+	defer archive.Close()
 	// 遍历目录
-	err = filepath.Walk(srcPath, func(path string, info os.FileInfo, err error) error {
+	filepath.Walk(srcPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		// 检查遍历的路径是否是源路径，避免出现连个相同的文件夹
-		// 如果是则进行下一次遍历
-		if path == srcPath {
-			return nil
-		}
+
 		// 获取文件头信息
 		header, _ := zip.FileInfoHeader(info)
-		header.Name = strings.TrimPrefix(path, srcPath+filepath.FromSlash("/"))
+		header.Name = strings.TrimPrefix(path,filepath.Dir(srcPath) + "/")
 		// 判断文件是不是文件夹
 		if info.IsDir() {
-			header.Name += filepath.FromSlash("/")
+			header.Name += "/"
 		} else {
 			// 设置zip文件的压缩算法
 			header.Method = zip.Deflate
 		}
 		// 创建压缩包头部信息
-		w, _ := zipFile.CreateHeader(header)
+		w, _ := archive.CreateHeader(header)
 		// 不是文件夹是将文件copy到流中
-		if !info.IsDir() {
-			newFile, _ := os.Open(path)
-			defer newFile.Close()
-			_, _ = io.Copy(w, newFile)
+		if ! info.IsDir() {
+			file, _ := os.Open(path)
+			defer file.Close()
+			_, err = io.Copy(w, file)
+			if err != nil {
+				return err
+			}
 		}
-		return nil
+		return err
 	})
+
+}
+// srcFile could be a single file or a directory
+func Zip(srcFile string, destZip string) error {
+	zipfile, err := os.Create("./cache/backup/" + destZip)
 	if err != nil {
-		log := logger.Std()
-		log.StdInfoLog("备份的目录不存在: " + srcPath)
-		panic(err)
+		return err
+	}
+	defer zipfile.Close()
+
+	archive := zip.NewWriter(zipfile)
+	defer archive.Close()
+
+	filepath.Walk(srcFile, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		header, err := zip.FileInfoHeader(info)
+		if err != nil {
+			return err
+		}
+
+
+		header.Name = strings.TrimPrefix(path, filepath.Dir(srcFile) + "/")
+		// header.Name = path
+		if info.IsDir() {
+			header.Name += "/"
+		} else {
+			header.Method = zip.Deflate
+		}
+
+		writer, err := archive.CreateHeader(header)
+		if err != nil {
+			return err
+		}
+
+		if ! info.IsDir() {
+			file, err := os.Open(path)
+			if err != nil {
+				return err
+			}
+			defer file.Close()
+			_, err = io.Copy(writer, file)
+		}
+		return err
+	})
+
+	return err
+}
+
+func ReadZipFile() {
+	// 测试读取zip文件
+	// Open a zip archive for reading.
+	r, err := zip.OpenReader("/Users/harder/github.com-codes/bups/_build_0" + "/cache/backup/web.zip")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer r.Close()
+	// Iterate through the files in the archive,
+	// printing some of their contents.
+	for _, f := range r.File {
+		fmt.Printf("Contents of %s:\n", f.Name)
+		rc, err := f.Open()
+		if err != nil {
+			log.Fatal(err)
+		}
+		_, err = io.CopyN(os.Stdout, rc, 68)
+		if err != nil {
+			log.Fatal(err)
+		}
+		rc.Close()
+		fmt.Println()
 	}
 }

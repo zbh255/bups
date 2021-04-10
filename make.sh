@@ -54,7 +54,8 @@ cp $project_path_config$conf_name $build_path_config$conf_name
 
 
 # 编译文件
-go build -o $APP_NAME
+go build -v -work $APP_NAME
+go build -o $APP_NAME -ldflags '-s -w'
 
 # 移动编译的文件至指定位置
 mv $APP_NAME $build_path
