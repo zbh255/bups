@@ -23,10 +23,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/operation_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/operation_db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/operation_file.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/operation_file.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/conf/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/conf/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/encry/toAes.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/encry/toAes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/encry/toRsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/encry/toRsa.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/logger/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make.sh" beforeDir="false" afterPath="$PROJECT_DIR$/make.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/common_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/common_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,50 +63,25 @@
     <property name="configurable.项目.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/_build_0/cache/backup" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/_build_0/cache/backup" />
       <recent name="$PROJECT_DIR$/conf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/example" />
+      <recent name="$PROJECT_DIR$/_build_0" />
+      <recent name="$PROJECT_DIR$/_build_0/dir" />
       <recent name="$PROJECT_DIR$/_build/conf" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go 测试.github.com/mengzushan/bups/test 中的 Test_encrypt">
-    <configuration name="go build github.com/mengzushan/bups" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="bups" />
-      <working_directory value="$PROJECT_DIR$/_build_0" />
-      <go_parameters value="-o _build_0/bups" />
-      <kind value="DIRECTORY" />
-      <filePath value="$PROJECT_DIR$/main.go" />
-      <package value="github.com/mengzushan/bups" />
-      <directory value="$PROJECT_DIR$" />
-      <output_directory value="$PROJECT_DIR$/_build_0" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build github.com/mengzushan/bups/example" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="bups" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/aes加密.go" />
-      <package value="github.com/mengzushan/bups/example" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build trm.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="bups" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/trm.go" />
-      <package value="github.com/mengzushan/bups" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="github.com/mengzushan/bups/test 中的 Test_encrypt" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go 测试.go test test">
+    <configuration name="github.com/mengzushan/bups/test 中的 Test_App_Match" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="bups" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -110,34 +89,66 @@
       <package value="github.com/mengzushan/bups/test" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTest_encrypt\E$" />
+      <pattern value="^\QTest_App_Match\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="make.bash" type="ShConfigurationType" temporary="true">
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/make.sh" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="INTERPRETER_OPTIONS" value="" />
+    <configuration name="github.com/mengzushan/bups/test 中的 Test_Cos_Upload" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mengzushan/bups/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTest_Cos_Upload\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="github.com/mengzushan/bups/test 中的 Test_Utils_Equal" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mengzushan/bups/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTest_Utils_Equal\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="github.com/mengzushan/bups/test 中的 Test_Utils_EqualToStrings" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mengzushan/bups/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTest_Utils_EqualToStrings\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="bups" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <package value="github.com/mengzushan/bups" />
+      <directory value="$PROJECT_DIR$/test" />
+      <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go 构建.go build github.com/mengzushan/bups" />
-      <item itemvalue="Go 构建.go build trm.go" />
-      <item itemvalue="Go 构建.go build github.com/mengzushan/bups/example" />
-      <item itemvalue="Shell Script.make.bash" />
-      <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_encrypt" />
+      <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Cos_Upload" />
+      <item itemvalue="Go 测试.go test test" />
+      <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_App_Match" />
+      <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Utils_Equal" />
+      <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Utils_EqualToStrings" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_encrypt" />
-        <item itemvalue="Go 构建.go build github.com/mengzushan/bups/example" />
-        <item itemvalue="Shell Script.make.bash" />
-        <item itemvalue="Go 构建.go build github.com/mengzushan/bups" />
-        <item itemvalue="Go 构建.go build trm.go" />
+        <item itemvalue="Go 测试.go test test" />
+        <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_App_Match" />
+        <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Utils_EqualToStrings" />
+        <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Utils_Equal" />
+        <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 Test_Cos_Upload" />
       </list>
     </recent_temporary>
   </component>
@@ -161,93 +172,196 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state x="442" y="213" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617982487258">
-      <screen x="36" y="23" width="1884" height="1057" />
+    <state x="446" y="213" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618586489779">
+      <screen x="41" y="23" width="1879" height="1057" />
     </state>
     <state x="460" y="145" width="1071" height="725" key="#com.intellij.execution.impl.EditConfigurationsDialog/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616602083283" />
     <state x="442" y="213" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1617982487258" />
+    <state x="443" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/37.23.1883.1057/1920.23.720.1257/2640.23.1280.697@37.23.1883.1057" timestamp="1618380119114" />
     <state x="465" y="145" key="#com.intellij.execution.impl.EditConfigurationsDialog/41.23.1879.1057/1920.23.720.1257/2640.23.1280.697@41.23.1879.1057" timestamp="1617007046382" />
+    <state x="446" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618586489779" />
     <state x="785" y="356" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616515055656">
       <screen x="35" y="23" width="1885" height="1057" />
     </state>
     <state x="785" y="356" key="#com.intellij.fileTypes.FileTypeChooser/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616515055656" />
-    <state x="764" y="275" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1616593358298">
-      <screen x="35" y="23" width="1885" height="1057" />
+    <state x="768" y="275" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1618589052648">
+      <screen x="41" y="23" width="1879" height="1057" />
     </state>
     <state x="764" y="275" key="#com.intellij.ide.macro.MacrosDialog/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616593358298" />
-    <state x="765" y="262" key="#com.intellij.ide.util.MemberChooser" timestamp="1616348977870">
-      <screen x="36" y="23" width="1884" height="1057" />
+    <state x="768" y="275" key="#com.intellij.ide.macro.MacrosDialog/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618589052648" />
+    <state x="766" y="262" key="#com.intellij.ide.util.MemberChooser" timestamp="1619272312568">
+      <screen x="37" y="23" width="1883" height="1057" />
     </state>
     <state x="765" y="262" key="#com.intellij.ide.util.MemberChooser/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616348977870" />
-    <state width="1843" height="353" key="GridCell.Tab.0.bottom" timestamp="1618062395602">
-      <screen x="35" y="23" width="1885" height="1057" />
+    <state x="766" y="262" key="#com.intellij.ide.util.MemberChooser/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619272312568" />
+    <state x="742" y="181" key="#xdebugger.evaluate" timestamp="1618495017182">
+      <screen x="41" y="23" width="1879" height="1057" />
     </state>
-    <state width="1843" height="353" key="GridCell.Tab.0.bottom/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048477161" />
-    <state width="1843" height="353" key="GridCell.Tab.0.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618062395602" />
-    <state width="1845" height="288" key="GridCell.Tab.0.bottom/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616584678200" />
+    <state x="742" y="181" key="#xdebugger.evaluate/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618495017182" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom" timestamp="1619617333256">
+      <screen x="39" y="23" width="1881" height="1057" />
+    </state>
+    <state width="1843" height="353" key="GridCell.Tab.0.bottom/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618409614477" />
+    <state width="1843" height="353" key="GridCell.Tab.0.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380857" />
+    <state width="1843" height="353" key="GridCell.Tab.0.bottom/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1618407092640" />
+    <state width="1843" height="353" key="GridCell.Tab.0.bottom/37.23.1883.1057/1920.23.720.1257/2640.23.1280.697@37.23.1883.1057" timestamp="1618380218785" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/37.23.1883.1057/1920.23.720.1257/2640.23.960.517@37.23.1883.1057" timestamp="1618838069482" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619534529409" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618844750373" />
+    <state width="1839" height="355" key="GridCell.Tab.0.bottom/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511888" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618676233388" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617333256" />
     <state width="1838" height="288" key="GridCell.Tab.0.bottom/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@1920.23.720.1257" timestamp="1617012106516" />
     <state width="1840" height="353" key="GridCell.Tab.0.bottom/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@40.23.1880.1057" timestamp="1617013596604" />
+    <state width="1839" height="339" key="GridCell.Tab.0.bottom/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755837763" />
     <state width="1838" height="288" key="GridCell.Tab.0.bottom/41.23.1879.1057/1920.23.720.1257/2640.23.1280.697@41.23.1879.1057" timestamp="1617011761600" />
-    <state width="1843" height="353" key="GridCell.Tab.0.center" timestamp="1618062395601">
-      <screen x="35" y="23" width="1885" height="1057" />
+    <state width="1839" height="355" key="GridCell.Tab.0.bottom/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667619" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center" timestamp="1619617333255">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
-    <state width="1843" height="353" key="GridCell.Tab.0.center/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048477160" />
-    <state width="1843" height="353" key="GridCell.Tab.0.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618062395601" />
-    <state width="1845" height="288" key="GridCell.Tab.0.center/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616584678200" />
+    <state width="1843" height="353" key="GridCell.Tab.0.center/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618409614475" />
+    <state width="1843" height="353" key="GridCell.Tab.0.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380857" />
+    <state width="1843" height="353" key="GridCell.Tab.0.center/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1618407092638" />
+    <state width="1843" height="353" key="GridCell.Tab.0.center/37.23.1883.1057/1920.23.720.1257/2640.23.1280.697@37.23.1883.1057" timestamp="1618380218783" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/37.23.1883.1057/1920.23.720.1257/2640.23.960.517@37.23.1883.1057" timestamp="1618838069481" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619534529408" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618844750372" />
+    <state width="1839" height="355" key="GridCell.Tab.0.center/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511887" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618676233387" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617333255" />
     <state width="1838" height="288" key="GridCell.Tab.0.center/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@1920.23.720.1257" timestamp="1617012106515" />
     <state width="1840" height="353" key="GridCell.Tab.0.center/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@40.23.1880.1057" timestamp="1617013596602" />
+    <state width="1839" height="339" key="GridCell.Tab.0.center/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755837761" />
     <state width="1838" height="288" key="GridCell.Tab.0.center/41.23.1879.1057/1920.23.720.1257/2640.23.1280.697@41.23.1879.1057" timestamp="1617011761599" />
-    <state width="1843" height="353" key="GridCell.Tab.0.left" timestamp="1618062395601">
-      <screen x="35" y="23" width="1885" height="1057" />
+    <state width="1839" height="355" key="GridCell.Tab.0.center/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667618" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left" timestamp="1619617333254">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
-    <state width="1843" height="353" key="GridCell.Tab.0.left/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048477160" />
-    <state width="1843" height="353" key="GridCell.Tab.0.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618062395601" />
-    <state width="1845" height="288" key="GridCell.Tab.0.left/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616584678199" />
+    <state width="1843" height="353" key="GridCell.Tab.0.left/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618409614474" />
+    <state width="1843" height="353" key="GridCell.Tab.0.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380857" />
+    <state width="1843" height="353" key="GridCell.Tab.0.left/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1618407092637" />
+    <state width="1843" height="353" key="GridCell.Tab.0.left/37.23.1883.1057/1920.23.720.1257/2640.23.1280.697@37.23.1883.1057" timestamp="1618380218782" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/37.23.1883.1057/1920.23.720.1257/2640.23.960.517@37.23.1883.1057" timestamp="1618838069480" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619534529407" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618844750372" />
+    <state width="1839" height="355" key="GridCell.Tab.0.left/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511887" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618676233386" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617333254" />
     <state width="1838" height="288" key="GridCell.Tab.0.left/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@1920.23.720.1257" timestamp="1617012106515" />
     <state width="1840" height="353" key="GridCell.Tab.0.left/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@40.23.1880.1057" timestamp="1617013596602" />
+    <state width="1839" height="339" key="GridCell.Tab.0.left/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755837761" />
     <state width="1838" height="288" key="GridCell.Tab.0.left/41.23.1879.1057/1920.23.720.1257/2640.23.1280.697@41.23.1879.1057" timestamp="1617011761598" />
-    <state width="1843" height="353" key="GridCell.Tab.0.right" timestamp="1618062395602">
-      <screen x="35" y="23" width="1885" height="1057" />
+    <state width="1839" height="355" key="GridCell.Tab.0.left/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667618" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right" timestamp="1619617333255">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
-    <state width="1843" height="353" key="GridCell.Tab.0.right/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048477161" />
-    <state width="1843" height="353" key="GridCell.Tab.0.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618062395602" />
-    <state width="1845" height="288" key="GridCell.Tab.0.right/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616584678200" />
+    <state width="1843" height="353" key="GridCell.Tab.0.right/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618409614475" />
+    <state width="1843" height="353" key="GridCell.Tab.0.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380857" />
+    <state width="1843" height="353" key="GridCell.Tab.0.right/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1618407092638" />
+    <state width="1843" height="353" key="GridCell.Tab.0.right/37.23.1883.1057/1920.23.720.1257/2640.23.1280.697@37.23.1883.1057" timestamp="1618380218784" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/37.23.1883.1057/1920.23.720.1257/2640.23.960.517@37.23.1883.1057" timestamp="1618838069481" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619534529409" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618844750373" />
+    <state width="1839" height="355" key="GridCell.Tab.0.right/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511888" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618676233387" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617333255" />
     <state width="1838" height="288" key="GridCell.Tab.0.right/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@1920.23.720.1257" timestamp="1617012106515" />
     <state width="1840" height="353" key="GridCell.Tab.0.right/40.23.1880.1057/1920.23.720.1257/2640.23.1280.697@40.23.1880.1057" timestamp="1617013596603" />
+    <state width="1839" height="339" key="GridCell.Tab.0.right/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755837762" />
     <state width="1838" height="288" key="GridCell.Tab.0.right/41.23.1879.1057/1920.23.720.1257/2640.23.1280.697@41.23.1879.1057" timestamp="1617011761600" />
-    <state width="1843" height="355" key="GridCell.Tab.1.bottom" timestamp="1618048360177">
-      <screen x="34" y="23" width="1886" height="1057" />
+    <state width="1839" height="355" key="GridCell.Tab.0.right/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667618" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom" timestamp="1619617171360">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state width="1843" height="355" key="GridCell.Tab.1.bottom/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048360177" />
-    <state width="1843" height="355" key="GridCell.Tab.1.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618044488434" />
-    <state width="1843" height="355" key="GridCell.Tab.1.center" timestamp="1618048360176">
-      <screen x="34" y="23" width="1886" height="1057" />
+    <state width="1843" height="355" key="GridCell.Tab.1.bottom/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380854" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619533381643" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618672293056" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511889" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618674678504" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617171360" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755560537" />
+    <state width="1839" height="355" key="GridCell.Tab.1.bottom/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667619" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center" timestamp="1619617171359">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state width="1843" height="355" key="GridCell.Tab.1.center/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048360176" />
-    <state width="1843" height="355" key="GridCell.Tab.1.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618044488433" />
-    <state width="1843" height="355" key="GridCell.Tab.1.left" timestamp="1618048360175">
-      <screen x="34" y="23" width="1886" height="1057" />
+    <state width="1843" height="355" key="GridCell.Tab.1.center/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380854" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619533381643" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618672293056" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511888" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618674678503" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617171359" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755560537" />
+    <state width="1839" height="355" key="GridCell.Tab.1.center/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667619" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left" timestamp="1619617171359">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state width="1843" height="355" key="GridCell.Tab.1.left/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048360175" />
-    <state width="1843" height="355" key="GridCell.Tab.1.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618044488433" />
-    <state width="1843" height="355" key="GridCell.Tab.1.right" timestamp="1618048360176">
-      <screen x="34" y="23" width="1886" height="1057" />
+    <state width="1843" height="355" key="GridCell.Tab.1.left/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380854" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619533381642" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618672293055" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511888" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618674678503" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617171359" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755560536" />
+    <state width="1839" height="355" key="GridCell.Tab.1.left/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667619" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right" timestamp="1619617171360">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state width="1843" height="355" key="GridCell.Tab.1.right/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618048360176" />
-    <state width="1843" height="355" key="GridCell.Tab.1.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618044488433" />
+    <state width="1843" height="355" key="GridCell.Tab.1.right/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618066380854" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/37.23.1883.1057/2640.23.960.517/1920.23.720.1257@37.23.1883.1057" timestamp="1619533381643" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618672293056" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619615511888" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618674678503" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619617171360" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/40.23.1880.1057/1920.23.720.1257/2640.23.960.517@40.23.1880.1057" timestamp="1618755560537" />
+    <state width="1839" height="355" key="GridCell.Tab.1.right/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618761667619" />
     <state x="514" y="190" key="SettingsEditor" timestamp="1617006091568">
       <screen x="42" y="23" width="1878" height="1057" />
     </state>
     <state x="509" y="190" key="SettingsEditor/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1616340904849" />
     <state x="514" y="190" key="SettingsEditor/42.23.1878.1057/1920.23.720.1257/2640.23.1280.697@42.23.1878.1057" timestamp="1617006091568" />
-    <state width="942" height="528" key="XDebugger.FullValuePopup" timestamp="1618047808124">
-      <screen x="34" y="23" width="1886" height="1057" />
+    <state width="942" height="528" key="XDebugger.FullValuePopup" timestamp="1619538881444">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state width="942" height="528" key="XDebugger.FullValuePopup/34.23.1886.1057/1920.23.720.1257/2640.23.1280.697@34.23.1886.1057" timestamp="1618047808124" />
     <state width="941" height="528" key="XDebugger.FullValuePopup/35.23.1885.1057/1920.23.720.1257/2640.23.1280.697@35.23.1885.1057" timestamp="1618044679650" />
-    <state x="707" y="470" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616583614846">
-      <screen x="36" y="23" width="1884" height="1057" />
+    <state width="941" height="528" key="XDebugger.FullValuePopup/38.23.1882.1057/1920.23.720.1257/2640.23.960.517@38.23.1882.1057" timestamp="1618672216827" />
+    <state width="942" height="528" key="XDebugger.FullValuePopup/38.23.1882.1057/2640.23.960.517/1920.23.720.1257@38.23.1882.1057" timestamp="1619535011245" />
+    <state width="941" height="528" key="XDebugger.FullValuePopup/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618674420432" />
+    <state width="942" height="528" key="XDebugger.FullValuePopup/39.23.1881.1057/2640.23.960.517/1920.23.720.1257@39.23.1881.1057" timestamp="1619538881444" />
+    <state width="939" height="528" key="XDebugger.FullValuePopup/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618585946851" />
+    <state x="667" y="315" width="624" height="472" key="find.popup" timestamp="1618493200822">
+      <screen x="41" y="23" width="1879" height="1057" />
+    </state>
+    <state x="667" y="315" width="624" height="472" key="find.popup/41.23.1879.1057/1920.23.720.1257/2640.23.960.517@41.23.1879.1057" timestamp="1618493200822" />
+    <state x="709" y="470" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1618672855696">
+      <screen x="39" y="23" width="1881" height="1057" />
     </state>
     <state x="707" y="470" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/36.23.1884.1057/1920.23.720.1257/2640.23.1280.697@36.23.1884.1057" timestamp="1616583614846" />
+    <state x="709" y="470" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/39.23.1881.1057/1920.23.720.1257/2640.23.960.517@39.23.1881.1057" timestamp="1618672855696" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/example/错误捕捉.go</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test/common_test.go</url>
+          <line>216</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bups$go_test_test.out" NAME="go test test Coverage Results" MODIFIED="1619536245162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/bups$github_com_mengzushan_bups_test__Test_Utils_Equal__3_.out" NAME="github.com/mengzushan/bups/test 中的 Test_Utils_Equal (3) Coverage Results" MODIFIED="1618589063456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/bups$github_com_mengzushan_bups_test__TestError.out" NAME="github.com/mengzushan/bups/test 中的 TestError Coverage Results" MODIFIED="1618380063570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
