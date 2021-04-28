@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"encoding/json"
 	"fmt"
+	cf "github.com/mengzushan/bups/common/conf"
 	"github.com/mengzushan/bups/common/logger"
 	"github.com/mengzushan/bups/utils"
 	"io"
@@ -34,7 +35,7 @@ type ConfigJson struct {
 
 func BackUpForFile() {
 	// 读取配置文件
-	conf := utils.GetConfig()
+	conf := cf.InitConfig()
 	// 创建压缩包内的Json配置文件
 	var enON = "on"
 	if conf.Encryption.Switch == "off" {
@@ -56,9 +57,9 @@ func BackUpForFile() {
 	_, err := file.Write(jsonf)
 	defer file.Close()
 	if err != nil {
-		log := logger.Std()
-		defer log.Close()
-		log.StdInfoLog("Json配置文件写入失败")
+		std, _ := logger.Std(nil)
+		defer std.Close()
+		std.StdInfoLog("Json配置文件写入失败")
 	}
 	if conf.Local.Web != "" {
 		//CreateZip(conf.Local.Web, "web.zip")
@@ -81,8 +82,8 @@ func CreateZip(srcPath string, createName string) {
 	defer zipfile.Close()
 	println(createName)
 	if err != nil {
-		log := logger.Std()
-		log.StdErrorLog("文件创建失败" + filepath.FromSlash(pathPrefix + createName))
+		std, _ := logger.Std(nil)
+		std.StdErrorLog("文件创建失败" + filepath.FromSlash(pathPrefix+createName))
 		panic(err)
 	}
 	// 创建压缩包流
@@ -96,7 +97,7 @@ func CreateZip(srcPath string, createName string) {
 
 		// 获取文件头信息
 		header, _ := zip.FileInfoHeader(info)
-		header.Name = strings.TrimPrefix(path,filepath.Dir(srcPath) + "/")
+		header.Name = strings.TrimPrefix(path, filepath.Dir(srcPath)+"/")
 		// 判断文件是不是文件夹
 		if info.IsDir() {
 			header.Name += "/"
@@ -107,7 +108,7 @@ func CreateZip(srcPath string, createName string) {
 		// 创建压缩包头部信息
 		w, _ := archive.CreateHeader(header)
 		// 不是文件夹是将文件copy到流中
-		if ! info.IsDir() {
+		if !info.IsDir() {
 			file, _ := os.Open(path)
 			defer file.Close()
 			_, err = io.Copy(w, file)
@@ -119,9 +120,17 @@ func CreateZip(srcPath string, createName string) {
 	})
 
 }
+
 // srcFile could be a single file or a directory
 func Zip(srcFile string, destZip string) error {
-	zipfile, err := os.Create("./cache/backup/" + destZip)
+	// 判断destZip参数是不是传递路径
+	var pwd string
+	if utils.Equals(destZip, "/") {
+		pwd = destZip
+	} else {
+		pwd = "./cache/backup/" + destZip
+	}
+	zipfile, err := os.Create(pwd)
 	if err != nil {
 		return err
 	}
@@ -140,8 +149,7 @@ func Zip(srcFile string, destZip string) error {
 			return err
 		}
 
-
-		header.Name = strings.TrimPrefix(path, filepath.Dir(srcFile) + "/")
+		header.Name = strings.TrimPrefix(path, filepath.Dir(srcFile)+"/")
 		// header.Name = path
 		if info.IsDir() {
 			header.Name += "/"
@@ -154,7 +162,7 @@ func Zip(srcFile string, destZip string) error {
 			return err
 		}
 
-		if ! info.IsDir() {
+		if !info.IsDir() {
 			file, err := os.Open(path)
 			if err != nil {
 				return err
