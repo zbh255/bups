@@ -10,6 +10,7 @@ require (
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/stretchr/testify v1.4.0 // indirect
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.24
 	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb // indirect
 	golang.org/x/sys v0.0.0-20210112080510-489259a85091 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
