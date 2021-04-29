@@ -1,0 +1,39 @@
+cloud_api = "COS"
+save_name = "host"
+save_time = 360
+save_time_pass = 7240
+
+[bucket]
+bucket_url = ""
+secretid = ""
+secretkey = ""
+token = ""
+
+[database]
+ipaddr = "127.0.0.1"
+port = "3306"
+user_name = ""
+user_passwd = ""
+db_name = "godb"
+db_name2 = "typecho"
+
+[local]
+web = "/Users/harder/github.com-codes/bups/test/test_files"
+static = "/Users/harder/github.com-codes/bups/test/test_files"
+log = ""
+
+[web_config]
+switch = "off"
+ipaddr = "127.0.0.1"
+port = ":8080"
+user_name = "admin"
+user_passwd = "admin"
+
+[encryption]
+switch = "off"
+encrypt_mode = "rsa"
+aes = ""
+
+[rsa]
+pub_key = "123"
+pri_key = "123"
