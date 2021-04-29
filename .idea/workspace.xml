@@ -20,17 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/operation_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/operation_db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/operation_file.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/operation_file.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/conf/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/conf/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/encry/toAes.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/encry/toAes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/encry/toRsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/encry/toRsa.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/logger/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/logger/log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/common_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/common_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
