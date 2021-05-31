@@ -26,6 +26,7 @@ fi
 build_path_data=$build_path'/data'
 build_path_cache=$build_path'/cache'
 build_path_backup=$build_path_cache'/backup'
+build_path_backup_upload=$build_path_backup'/upload'
 build_path_rsa=$build_path_cache'/rsa'
 build_path_log=$build_path'/log'
 
@@ -37,6 +38,7 @@ echo ${build_path_cache}
 echo ${build_path_backup}
 echo ${build_path_rsa}
 echo ${build_path_config}
+echo ${build_path_backup_upload}
 
 # 创建文件夹
 mkdir -p $build_path_data
@@ -44,6 +46,7 @@ mkdir -p $build_path_backup
 mkdir -p $build_path_rsa
 mkdir -p $build_path_config
 mkdir -p $build_path_log
+mkdir -p $build_path_backup_upload
 
 # 创建空文件
 touch $build_path_log'/app.log'

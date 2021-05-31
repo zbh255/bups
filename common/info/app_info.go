@@ -48,7 +48,7 @@ func GetAppInfo() *AppInfo {
 // 返回的错误为自定义错误
 func SetAppInfo(ptr *AppInfo) this.Error {
 	ptr.AppVersion = Version
-	ptr.BuildTime = time.Now().Unix()
+	ptr.BuildTime = time.Now().UnixNano()
 	pwd, err := os.Getwd()
 	if err != nil {
 		return this.SetError(err)

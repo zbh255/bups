@@ -9,6 +9,7 @@ import (
 	"github.com/mengzushan/bups/common/logger"
 	"github.com/mengzushan/bups/utils"
 	"io"
+	"io/ioutil"
 	"os"
 )
 
@@ -23,6 +24,10 @@ type CryptToRsa interface {
 }
 
 const RsaBit   int      = 1024 // rsa密钥长度
+
+// 测试使用的路径
+var TestPubPemPath string
+var TestPriPemPath string
 
 type Pem struct{}
 
@@ -95,7 +100,7 @@ func (p *Pem) CreateRsaPubKeyAndPriKey(pubf, prif io.Writer) this.Error {
 	return this.Nil
 }
 
-func (p *Pem) ReadPemKey(model int, file io.Reader) (string, this.Error) {
+func (p *Pem) ReadPemKey(model int, file io.Reader) ([]byte, this.Error) {
 	panic("implement me")
 }
 
@@ -124,11 +129,22 @@ func (p *Pem) MatchPubKeyAndPriKey(pub, pri string) bool {
 	}
 	defer priFile.Close()
 	// 检查文件内容
-	pubFileInfo,_ := pubFile.Stat()
-	priFileInfo,_ := priFile.Stat()
-	// 1024位密钥经过Base64格式化之后的标准长度,公钥=280,私钥>=887
-	if pubFileInfo.Size() != 280 || priFileInfo.Size() < 887 {
+	bufPub, _ := ioutil.ReadAll(pubFile)
+	bufPri, _ := ioutil.ReadAll(priFile)
+	// 根据简单的加解密检查密钥是否正确
+	src := "hello world"
+	var entryRsa CryptToRsa = &CryptBlocks{}
+	cipherText, err := entryRsa.EncryptToRsa([]byte(src), bufPub)
+	if err != this.Nil {
 		return false
 	}
-	return true
+	deCipherText, err := entryRsa.DecryptToRsa(cipherText, bufPri)
+	if err != this.Nil {
+		return false
+	}
+	if string(deCipherText) == src {
+		return true
+	} else {
+		return false
+	}
 }

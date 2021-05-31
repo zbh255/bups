@@ -2,16 +2,22 @@ package app
 
 import (
 	"archive/zip"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	cf "github.com/mengzushan/bups/common/conf"
+	"github.com/mengzushan/bups/common/encry"
+	this "github.com/mengzushan/bups/common/error"
 	"github.com/mengzushan/bups/common/logger"
 	"github.com/mengzushan/bups/utils"
 	"io"
+	"io/ioutil"
 	"log"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 type InfoJson struct {
@@ -26,6 +32,7 @@ type InfoJson struct {
 type ConfigJson struct {
 	Rsa        string `json:"rsa"`
 	Aes        string `json:"aes"`
+	Key        string `json:"key"`
 	Format     string `json:"format"`
 	WebPath    string `json:"webPath"`
 	StaticPath string `json:"staticPath"`
@@ -33,18 +40,42 @@ type ConfigJson struct {
 	DbName     string `json:"dbName"`
 }
 
-func BackUpForFile() {
+func BackUpForFile() *ConfigJson {
+	// 初始化日志
+	std, _ := logger.Std(nil)
+	defer std.Close()
 	// 读取配置文件
 	conf := cf.InitConfig()
 	// 创建压缩包内的Json配置文件
-	var enON = "on"
+	var enONToAes = "on"
+	var enONToRsa = "on"
+	// 密钥
+	key := ""
 	if conf.Encryption.Switch == "off" {
-		enON = "off"
+		enONToRsa = "off"
+		enONToAes = "off"
+		// 清空不需要的数据
+		conf.Encryption.EncryptMode = ""
+	}
+	switch conf.Encryption.EncryptMode {
+	case "aes":
+		enONToRsa = "off"
+		break
+	case "rsa","rsa+aes","aes+rsa":
+		var err error
+		key, err = encryptKey()
+		if err != this.Nil {
+			return nil
+		}
+		break
+	default:
+		break
 	}
 	jsons := ConfigJson{
-		Rsa:        enON,
-		Aes:        enON,
+		Rsa:        enONToRsa,
+		Aes:        enONToAes,
 		Format:     "zip",
+		Key:        key,
 		WebPath:    conf.Local.Web,
 		StaticPath: conf.Local.Static,
 		LogPath:    conf.Local.Log,
@@ -57,21 +88,50 @@ func BackUpForFile() {
 	_, err := file.Write(jsonf)
 	defer file.Close()
 	if err != nil {
-		std, _ := logger.Std(nil)
-		defer std.Close()
-		std.StdInfoLog("Json配置文件写入失败")
+		std.StdErrorLog("Json配置文件写入失败")
+		return nil
 	}
 	if conf.Local.Web != "" {
 		//CreateZip(conf.Local.Web, "web.zip")
-		_ = Zip(conf.Local.Web, "web.zip")
+		err = Zip(conf.Local.Web, "web.zip")
 	}
 	if conf.Local.Static != "" {
 		//CreateZip(conf.Local.Static, "static.zip")
-		_ = Zip(conf.Local.Static, "static.zip")
+		err = Zip(conf.Local.Static, "static.zip")
 	}
 	if conf.Local.Log != "" {
-		_ = Zip(conf.Local.Log, "log.zip")
+		err = Zip(conf.Local.Log, "log.zip")
 	}
+	if err != nil {
+		std.StdErrorLog("文件压缩失败: " + err.Error())
+		return nil
+	} else {
+		std.StdInfoLog(fmt.Sprintf("文件压缩成功: %s-%s-%s", conf.Local.Web, conf.Local.Log, conf.Local.Static))
+		return &jsons
+	}
+}
+
+func encryptKey() (string, this.Error) {
+	key := ""
+	var encrypt encry.CryptToRsa = &encry.CryptBlocks{}
+	for i := 0; i < 16; i++ {
+		rand.Seed(time.Now().UnixNano())
+		k := rand.Intn(91-65) + 65
+		key += string(byte(k))
+	}
+	// 读取公钥
+	pathHead, _ := os.Getwd()
+	pubPem, err := os.Open(pathHead + "/cache/rsa/public.pem")
+	if err != nil {
+		return "", this.SetError(err)
+	}
+	fileData, _ := ioutil.ReadAll(pubPem)
+	keyByte, err := encrypt.EncryptToRsa([]byte(key), fileData)
+	if err != this.Nil {
+		return "", this.SetError(err)
+	}
+	// 使用base64编码加密之后的密钥
+	return base64.StdEncoding.EncodeToString(keyByte), this.Nil
 }
 
 func CreateZip(srcPath string, createName string) {
