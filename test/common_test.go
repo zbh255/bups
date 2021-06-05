@@ -11,10 +11,12 @@ import (
 	"github.com/mengzushan/bups/common/upload"
 	"github.com/mengzushan/bups/utils"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"reflect"
 	"strconv"
 	"testing"
+	"time"
 )
 
 func Test_encrypt(t *testing.T) {
@@ -46,6 +48,13 @@ func Test_Encrypt_Rsa(t *testing.T) {
 	} else {
 		t.Log("创建密钥对成功: ",err.Error())
 	}
+	bl := po.MatchPubKeyAndPriKey(pathHead + "/cache/rsa/public.pem",pathHead + "/cache/rsa/private.pem")
+	if bl {
+		t.Log("密钥匹配成功")
+	} else {
+		t.Error("密钥匹配失败")
+	}
+	// 加解密测试
 }
 
 func Test_backUpFileEncrypt(t *testing.T) {
@@ -227,6 +236,19 @@ func Test_Utils_Equal(t *testing.T) {
 	}
 }
 
+func Benchmark_Utils_Equal_Kmp(b *testing.B) {
+	aString := make([]byte,1000000)
+	for i := 0 ; i < 1000000; i++ {
+		rand.Seed(time.Now().UnixNano())
+		rn := rand.Intn(91 - 65) + 65
+		aString[i] = byte(rn)
+	}
+	t1 := time.Now().Unix()
+	utils.Equal(string(aString),string(aString[900000:933000]))
+	t2 := time.Now().Unix()
+	println(t2 - t1)
+}
+
 func Benchmark_Utils_Equals(t *testing.B) {
 	aString := make([]byte, 1000000)
 	for i := 0; i < 1000000; i++ {
@@ -355,5 +377,36 @@ func Test_Utils_EqualToStrings(t *testing.T) {
 		t.Log("utils.EqualToStrings " + "测试成功")
 	} else {
 		t.Error("utils.EqualToStrings " + "测试失败")
+	}
+}
+
+// 测试备份文件中的json配置文件
+func Test_BackUp_Config_Json(t *testing.T) {
+	app.BackUpForFile()
+}
+
+// app调用测试
+// 无加密文件选项
+func Test_App_Timer(t *testing.T) {
+	_, err := app.TimerTask(conf.InitConfig())
+	if err != error.Nil {
+		t.Error(err)
+	} else {
+		t.Log(err)
+	}
+}
+
+// app调用测试
+// 有加密文件选项
+func Test_App_Timer_Encrypt(t *testing.T) {
+	config := conf.InitConfig()
+	config.Encryption.Switch = "on"
+	config.Encryption.Aes = "1234567890123456"
+	config.Local.Log = ""
+	_, err := app.TimerTask(config)
+	if err != error.Nil {
+		t.Error(err)
+	} else {
+		t.Log(err)
 	}
 }

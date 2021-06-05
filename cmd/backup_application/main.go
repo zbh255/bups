@@ -15,6 +15,21 @@ import (
 )
 
 func main() {
+	// 检查是否有参数
+	if len(os.Args) > 1 {
+		argErr := app.DeCommandArgs()
+		if argErr != this.Nil {
+			os.Exit(2)
+		} else {
+			os.Exit(0)
+		}
+	}
+	// 调用函数调用
+	MainDisPatch()
+}
+
+// 应用程序的启动调度逻辑
+func MainDisPatch()  {
 	conf := cf.InitConfig()
 	// webui配置项为开启则进入
 	log, err := logger.Std(nil)

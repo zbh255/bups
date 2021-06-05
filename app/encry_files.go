@@ -1,6 +1,7 @@
 package app
 
 import (
+	"encoding/base64"
 	"github.com/mengzushan/bups/common/conf"
 	"github.com/mengzushan/bups/common/encry"
 	this "github.com/mengzushan/bups/common/error"
@@ -8,7 +9,6 @@ import (
 	"github.com/mengzushan/bups/utils"
 	"io/ioutil"
 	"os"
-	"encoding/base64"
 	"path/filepath"
 	"strings"
 )
