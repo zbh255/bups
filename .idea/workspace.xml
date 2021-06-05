@@ -21,14 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app_timer.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/app_timer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/encry_files.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/encry_files.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/backup_application/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/backup_application/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/make.sh" beforeDir="false" afterPath="$PROJECT_DIR$/make.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cache/backup/static.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cache/backup/web.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/common_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/common_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/conf/dev/app.conf.toml" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf/dev/app.conf.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/log/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/test/log/app.log" afterDir="false" />
     </list>
