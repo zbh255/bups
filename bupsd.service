@@ -1,0 +1,15 @@
+[Unit]
+Description=bups backup service
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Restart=1
+RestartSec=5s
+ExecStart=/usr/local/bups/bups -s start
+ExecStop=/usr/local/bups/bups -s stop
+ExecReload=/usr/local/bups/bups -s restart
+
+[Install]
+WantedBy=multi-user.target
