@@ -5,11 +5,14 @@ export GOOS=linux
 export GOARCH=amd64
 export GOPROXY="https://goproxy.cn,direct"
 export GIN_MODE=release
-export BUPS_MODE='debug'
-export APP_NAME='bups'
+export BUPS_MODE='release'
+export Main_APP_NAME='bups'
+export Main_APP_CMD='./cmd/backup_application'
+export Recover_APP_NAME='bups_recover'
+export Recover_APP_CMD='./cmd/recover_application'
 
 # 变量
-build_path="./_bulid_1"
+build_path="./_bulid_release"
 build_path_config=$build_path'/conf/dev'
 project_path_config='./conf/dev'
 conf_name='/app.conf.toml' #配置文件名称
@@ -56,9 +59,9 @@ touch $build_path_log'/gin.log'
 cp $project_path_config$conf_name $build_path_config$conf_name
 
 
-# 编译文件
-go build -v -work $APP_NAME
-go build -o $APP_NAME -ldflags '-s -w'
+# 编译主程序文件
+go build $Main_APP_CMD -v -work $Main_APP_NAME
+go build $Main_APP_CMD -o $Main_APP_NAME -ldflags '-s -w'
 
 # 移动编译的文件至指定位置
-mv $APP_NAME $build_path
+mv $Main_APP_NAME $build_path
