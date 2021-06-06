@@ -31,7 +31,7 @@ func DeCommandArgs() this.Error {
 	// st是启动参数
 	st := flag.String("s","","start(启动) restart(重启) stop(停止)")
 	// op是操作参数
-	op := flag.String("op","","web_config(开启网页配置模式)")
+	op := flag.String("op","","web_config(开启网页配置模式) del_upload_cache(删除上传文件的本地缓存)")
 	flag.Parse()
 	fmt.Println(os.Args)
 	if *ce != "" {
@@ -120,6 +120,21 @@ func option(op string) this.Error {
 	switch op {
 	case "web_config":
 		web.Run()
+		break
+	case "del_upload_cache":
+		log, err := logger.Std(nil)
+		defer utils.ReCoverErrorAndPrint()
+		defer log.Close()
+		if err != this.Nil {
+			panic(err)
+		}
+		pathHead, _ := os.Getwd()
+		err = utils.CleanUpCache(pathHead + "/cache/upload")
+		if err != this.Nil {
+			return err
+		} else {
+			log.StdInfoLog("在路径: " + pathHead + "/cache/upload"+ " 中清理了上传缓存")
+		}
 		break
 	}
 	return this.Nil
