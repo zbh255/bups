@@ -228,11 +228,12 @@ func Benchmark_Utils_Equal(t *testing.B) {
 }
 
 func Test_Utils_Equal(t *testing.T) {
-	bl := utils.Equal("/User/Harder/Mac/Mini/web.zip", "web.zip")
-	if bl == false {
-		t.Error("Equal结果测试不正确")
-	} else {
+	bl := utils.Equal("/User/Harder/Mac/Mini/web.zip", "/")
+	bl2 := utils.Equal("/User/Harder/Mac/Mini/web.zip", "web.")
+	if bl && bl2 {
 		t.Log("Equal结果测试正确")
+	} else {
+		t.Error("Equal结果测试不正确")
 	}
 }
 
@@ -277,10 +278,11 @@ func Benchmark_Utils_EqualPro(t *testing.B) {
 func Test_App_Match(t *testing.T) {
 	conf.ConfModel = conf.ConfModelDev
 	config := conf.InitConfig()
+	config.Database.DbName = ""
 	fl, err := app.MatchPathFile(config)
 	if err != error.Nil {
-		t.Log("文件匹配列表功能测试结果: " + err.Error())
-		t.Log(fl)
+		t.Error("文件匹配列表功能测试结果: " + err.Error())
+		t.Error(fl)
 	} else {
 		t.Log("文件匹配列表功能测试成功")
 	}
@@ -382,7 +384,8 @@ func Test_Utils_EqualToStrings(t *testing.T) {
 
 // 测试备份文件中的json配置文件
 func Test_BackUp_Config_Json(t *testing.T) {
-	app.BackUpForFile()
+	config := conf.InitConfig()
+	app.BackUpForFile(config)
 }
 
 // app调用测试
@@ -409,4 +412,23 @@ func Test_App_Timer_Encrypt(t *testing.T) {
 	} else {
 		t.Log(err)
 	}
+}
+
+// app调用测试
+// 无加密文件选项
+func Test_App_Timer_NoEncrypt(t *testing.T) {
+	config := conf.InitConfig()
+	config.Encryption.Switch = "off"
+	config.Encryption.EncryptMode = ""
+	config.Encryption.Aes = ""
+	_, err := app.TimerTask(config)
+	if err != error.Nil {
+		t.Error(err)
+	} else {
+		t.Log(err)
+	}
+}
+
+func TestTimer(t *testing.T) {
+	t.Log(time.Unix(int64(time.Now().UnixNano())/int64(time.Second),0).Format("2006-01-02 15:04:05"))
 }
