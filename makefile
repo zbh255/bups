@@ -42,6 +42,7 @@ build_path_log=$(build_path)/log
 config_path_file=app.conf.toml
 build_path_log_app=app.log
 build_path_log_gin=gin.log
+build_path_log_service=service.log
 build_path_dir_info=app_info.json
 build_source_file=main.go
 
@@ -61,6 +62,7 @@ create:
 	# 创建文件
 	touch $(build_path_log)/$(build_path_log_app)
 	touch $(build_path_log)/$(build_path_log_gin)
+	touch $(build_path_log)/$(build_path_log_service)
 	touch $(build_path_dir)/$(build_path_dir_info)
 	# 拷贝项目的文件
 	cp $(project_config_path)/$(config_path_file) $(config_path)/$(config_path_file)

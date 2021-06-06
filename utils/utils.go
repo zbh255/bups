@@ -38,6 +38,9 @@ func equalForPtr(a, b string) bool {
 			return false
 		}
 		if buf1[i] == buf2[0] && buf1[bNode] == buf2[buf2Num-1] {
+			if len(buf2) == 1 {
+				return true
+			}
 			for j := i + 1; j < bNode; j++ {
 				if buf1[j] == buf2[j-i] {
 					equalNum++
@@ -127,6 +130,7 @@ func createNext(b []byte) []int {
 	return pMatches
 }
 
+// 废弃接口
 func Equals(a, b string) bool {
 	buf1 := []byte(a)
 	buf2 := []byte(b)
