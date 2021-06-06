@@ -21,21 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app_timer.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/app_timer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/command_args.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/command_args.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/operation_file.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/operation_file.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/backup_application/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/backup_application/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/daemon/daemon.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/daemon/daemon.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/test/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/app_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/app_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/app.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cache/backup/static.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test/cache/backup/web.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/common_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/common_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/conf/dev/app.conf.toml" beforeDir="false" afterPath="$PROJECT_DIR$/test/conf/dev/app.conf.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/log/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/test/log/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_files.aes" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_files.aes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_files.aes" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
