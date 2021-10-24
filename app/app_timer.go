@@ -2,11 +2,11 @@ package app
 
 import (
 	"github.com/mengzushan/bups/common/conf"
+	"github.com/mengzushan/bups/common/daemon"
 	this "github.com/mengzushan/bups/common/error"
 	"github.com/mengzushan/bups/common/info"
 	"github.com/mengzushan/bups/common/logger"
 	"github.com/mengzushan/bups/common/upload"
-	"github.com/mengzushan/bups/common/daemon"
 	"github.com/mengzushan/bups/utils"
 	"github.com/mengzushan/bups/web"
 	"io"

@@ -4,7 +4,6 @@ go 1.15
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/alexmullins/zip v0.0.0-20180717182244-4affb64b04d0
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/golang/protobuf v1.4.2 // indirect
