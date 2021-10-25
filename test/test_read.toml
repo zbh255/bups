@@ -1,3 +1,4 @@
+# 测试使用的配置文件
 [main]
 # 安装的插件
 install = ["backup.so","tencnt_cos_upload.so","web_config.so","recover.so"]
@@ -8,3 +9,5 @@ lopp_time = 7200
 [plugin.backup.file_path]
 log = "./log"
 static = "./static"
+other = ["other1","other2","other3","other4"]
+time_out = 3
