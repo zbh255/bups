@@ -1,4 +1,4 @@
-module github.com/mengzushan/bups
+module github.com/abingzo/bups
 
 go 1.15
 
