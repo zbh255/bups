@@ -64,12 +64,10 @@ func (u *Upload) ConfWrite(writer io.Writer) {
 }
 
 // Start 启动函数
-func (u *Upload) Start()  {
-	_, _ = StdOut.Write([]byte("插件测试启动开始\n"))
-	_, _ = StdOut.Write([]byte(string(conf) + "\n"))
-	_, _ = StdOut.Write([]byte("插件测试启动完成\n"))
-}
-
-func (u *Upload) ArgsStart(args []string) {
-
+func (u *Upload) Start(args []string)  {
+	if args == nil {
+		_, _ = StdOut.Write([]byte("插件测试启动开始\n"))
+		_, _ = StdOut.Write([]byte(string(conf) + "\n"))
+		_, _ = StdOut.Write([]byte("插件测试启动完成\n"))
+	}
 }

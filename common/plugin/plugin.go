@@ -34,8 +34,7 @@ type plugins []Plugin
 
 // Plugin 插件的插入要实现的接口
 type Plugin interface {
-	Start()
-	ArgsStart(args []string)
+	Start(args []string)
 	GetName() string
 	GetType() Type
 	GetSupport() []int
@@ -117,7 +116,7 @@ func (c *Context) SetState(s Type) {
 	}
 	// call
 	for _,v := range dst {
-		v.Start()
+		v.Start(nil)
 	}
 	c.state = s
 }
