@@ -30,19 +30,28 @@ const (
 	SupportConfigWrite
 )
 
-// 一些重要的，插件必需要实现的函数类型
-type Start func()
-type GetName func() string
-type GetType func() Type
-type GetSupport func() []int
-type ConfRead func(io.Reader)
-type ConfWrite func(io.Writer)
+type plugins []Plugin
+
+// Plugin 插件的插入要实现的接口
+type Plugin interface {
+	Start()
+	ArgsStart(args []string)
+	GetName() string
+	GetType() Type
+	GetSupport() []int
+	SetStdout(writer io.Writer)
+	ConfRead(reader io.Reader)
+	ConfWrite(writer io.Writer)
+}
+
+// New 一些重要的，插件必需要实现的函数类型
+type New func() Plugin
 
 type Context struct {
 	lock      sync.Mutex
-	start     []p.Symbol
-	init      []p.Symbol
-	bCallBack []p.Symbol
+	start     plugins
+	init      plugins
+	bCallBack plugins
 	support   map[string][]int
 	Conf      io.ReadWriteCloser
 	StdOut    io.Writer
@@ -57,62 +66,36 @@ func (c *Context) Register(s string) {
 	if err != nil {
 		panic(err)
 	}
-	sb, err := pg.Lookup("GetType")
+	// 调佣
+	interFace, err := pg.Lookup("New")
 	if err != nil {
 		panic(err)
 	}
-	// 启动函数
-	sFn, err := pg.Lookup("Start")
-	if err != nil {
-		panic(err)
-	}
-	// 获取名字和支持
-	pluginName, err := pg.Lookup("GetName")
-	if err != nil {
-		panic(err)
-	}
-	pluginSupport, err := pg.Lookup("GetSupport")
-	if err != nil {
-		panic(err)
-	}
-	// 设置标准输出的函数
-	setStdout, err := pg.Lookup("SetStdout")
-	if err != nil {
-		panic(err)
-	}
-	// 设置配置文件的读取，写入函数
-	confRead, err := pg.Lookup("ConfRead")
-	if err != nil {
-		panic(err)
-	}
-	confWrite, err := pg.Lookup("ConfWrite")
-	if err != nil {
-		panic(err)
-	}
-	c.support[pluginName.(func() string)()] = pluginSupport.(func() []int)()
+	regPlugin := interFace.(func() Plugin)()
+	c.support[regPlugin.GetName()] = regPlugin.GetSupport()
 	// 实现对应的支持
-	for _, v := range c.support[pluginName.(func() string)()] {
+	for _, v := range c.support[regPlugin.GetName()] {
 		switch v {
 		case SupportArgs:
 			continue
 		case SupportLogger:
-			setStdout.(func(io.Writer))(c.StdOut)
+			regPlugin.SetStdout(c.StdOut)
 		case SupportConfigRead:
-			confRead.(func(io.Reader))(c.Conf)
+			regPlugin.ConfRead(c.Conf)
 		case SupportConfigWrite:
-			confWrite.(func(io.Writer))(c.Conf)
+			regPlugin.ConfWrite(c.Conf)
 		default:
 			panic("not support type")
 		}
 	}
 	// 获取类型
-	switch sb.(func() Type)() {
+	switch regPlugin.GetType() {
 	case Init:
-		c.init = append(c.init, sFn)
+		c.init = append(c.init, regPlugin)
 	case BStart:
-		c.start = append(c.start, sFn)
+		c.start = append(c.start, regPlugin)
 	case BCallBack:
-		c.bCallBack = append(c.bCallBack, sFn)
+		c.bCallBack = append(c.bCallBack, regPlugin)
 	default:
 		panic("not support plugin type")
 	}
@@ -121,7 +104,7 @@ func (c *Context) Register(s string) {
 func (c *Context) SetState(s Type) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-	dst := make([]p.Symbol,0,10)
+	dst := make(plugins,0,10)
 	switch s {
 	case BStart:
 		dst = append(c.start)
@@ -134,7 +117,7 @@ func (c *Context) SetState(s Type) {
 	}
 	// call
 	for _,v := range dst {
-		v.(func())()
+		v.Start()
 	}
 	c.state = s
 }

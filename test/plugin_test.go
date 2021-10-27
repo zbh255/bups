@@ -40,6 +40,6 @@ func TestPluginLoad(t *testing.T) {
 	ctx.Conf = &Metadata{}
 	_, _ = ctx.Conf.Write([]byte("这就是配置文件"))
 	path,_ := os.Getwd()
-	ctx.Register(path + "/plugins/upload.so")
+	ctx.Register(path + "/plugins/upload")
 	ctx.SetState(plugin.BCallBack)
 }

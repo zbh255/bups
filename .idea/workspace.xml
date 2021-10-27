@@ -22,21 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="">
+    <list default="true" id="bc47e580-cf9c-4b1b-b91c-e40a6223e722" name="默认的" comment="默认的">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app_timer.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/app_timer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/command_args.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/command_args.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/conf/config.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/daemon/daemon.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/dev/app.conf.toml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/dev/app.conf.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/app_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/common_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/conf/dev/app.conf.toml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/error_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/log/app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/log/gin.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/plugin/plugin.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/plugin/plugin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/upload/upload.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/upload/upload.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/plugin_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/plugin_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,15 +84,7 @@
       <recent name="$PROJECT_DIR$/test/cache" />
     </key>
   </component>
-  <component name="RunManager" selected="Go 测试.github.com/abingzo/bups/test 中的 TestWriteConfig">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="bups" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Go 测试.github.com/abingzo/bups/test 中的 TestPluginLoad">
     <configuration name="go build github.com/mengzushan/bups/example (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="bups" />
       <working_directory value="$PROJECT_DIR$" />
@@ -110,15 +92,6 @@
       <package value="github.com/mengzushan/bups/example" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/example/异步exec.go" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="bups" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration name="github.com/abingzo/bups/test 中的 TestPluginLoad" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -178,9 +151,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go 测试.github.com/abingzo/bups/test 中的 TestPluginLoad" />
         <item itemvalue="Go 测试.github.com/abingzo/bups/test 中的 TestWriteConfig" />
         <item itemvalue="Go 测试.github.com/abingzo/bups/test 中的 TestReadConfig" />
-        <item itemvalue="Go 测试.github.com/abingzo/bups/test 中的 TestPluginLoad" />
         <item itemvalue="Go 测试.github.com/mengzushan/bups/test 中的 TestPluginLoad" />
         <item itemvalue="Go 构建.go build github.com/mengzushan/bups/example (1)" />
       </list>
