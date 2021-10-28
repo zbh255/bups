@@ -21,11 +21,11 @@ func TestWriteConfig(t *testing.T) {
 		panic(err)
 	}
 	cfg := config.Read(file)
-	writeFile,err := os.OpenFile("./test_write.toml",os.O_WRONLY,0777)
+	writeFile, err := os.OpenFile("./test_write.toml", os.O_WRONLY, 0777)
 	if err != nil {
 		panic(err)
 	}
-	if err := config.Write(writeFile,cfg);err != nil {
+	if err := config.Write(writeFile, cfg); err != nil {
 		panic(err)
 	}
 }

@@ -15,7 +15,7 @@ export Recover_APP_CMD='./cmd/recover_application'
 build_path="./_bulid_release"
 build_path_config=$build_path'/conf/dev'
 project_path_config='./conf/dev'
-conf_name='/app.conf.toml' #配置文件名称
+conf_name='/config.toml' #配置文件名称
 if [ $BUPS_MODE == 'debug' ]
 then
     build_path_config=$build_path'/conf/dev'
