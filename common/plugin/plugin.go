@@ -9,14 +9,14 @@ import (
 
 type Type int
 
+// Init 初始化时调用的插件
+const Init Type = 0
+
 // BStart 单次备份开始调用的插件
 const BStart Type = 1
 
 // BCallBack 备份完毕调用的插件
 const BCallBack Type = 2
-
-// Init 初始化时调用的插件
-const Init Type = 3
 
 // 插件需要的支持
 const (
@@ -28,6 +28,8 @@ const (
 	SupportConfigRead
 	// SupportConfigWrite 配置文件写入的支持
 	SupportConfigWrite
+	// SupportNativeStdout 共享输出缓冲区的支持
+	SupportNativeStdout
 )
 
 type plugins []Plugin
@@ -39,6 +41,7 @@ type Plugin interface {
 	GetType() Type
 	GetSupport() []int
 	SetStdout(writer io.Writer)
+	SetLogOut(writer io.Writer)
 	ConfRead(reader io.Reader)
 	ConfWrite(writer io.Writer)
 }
@@ -53,9 +56,12 @@ type Context struct {
 	bCallBack plugins
 	support   map[string][]int
 	Conf      io.ReadWriteCloser
-	StdOut    io.Writer
+	// 共享的日志输出
+	LogOut io.Writer
+	// 共享的缓冲输出
+	StdOut io.Writer
 	// 状态的流转，每流入一个状态时则调用对应的插件启动函数
-	state 	  Type
+	state Type
 }
 
 func (c *Context) Register(s string) {
@@ -78,11 +84,13 @@ func (c *Context) Register(s string) {
 		case SupportArgs:
 			continue
 		case SupportLogger:
-			regPlugin.SetStdout(c.StdOut)
+			regPlugin.SetStdout(c.LogOut)
 		case SupportConfigRead:
 			regPlugin.ConfRead(c.Conf)
 		case SupportConfigWrite:
 			regPlugin.ConfWrite(c.Conf)
+		case SupportNativeStdout:
+			regPlugin.SetStdout(c.StdOut)
 		default:
 			panic("not support type")
 		}
@@ -103,7 +111,7 @@ func (c *Context) Register(s string) {
 func (c *Context) SetState(s Type) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-	dst := make(plugins,0,10)
+	dst := make(plugins, 0, 10)
 	switch s {
 	case BStart:
 		dst = append(c.start)
@@ -115,7 +123,7 @@ func (c *Context) SetState(s Type) {
 		panic("not support state type")
 	}
 	// call
-	for _,v := range dst {
+	for _, v := range dst {
 		v.Start(nil)
 	}
 	c.state = s

@@ -20,26 +20,38 @@ func (m *Metadata) Read(p []byte) (int, error) {
 		ptr++
 	}
 	if ptr == len(m.b) {
-		return ptr,io.EOF
+		return ptr, io.EOF
 	}
-	return ptr,nil
+	return ptr, nil
 }
 
-func (m *Metadata) Write(p []byte) (int,error) {
-	m.b = append(m.b,p...)
-	return len(m.b),nil
+func (m *Metadata) Write(p []byte) (int, error) {
+	m.b = append(m.b, p...)
+	return len(m.b), nil
 }
 
 func (m *Metadata) Close() error {
 	return nil
 }
 
+type StdOut struct {
+	stdout *os.File
+}
+
+func (s *StdOut) Write(p []byte) (int, error) {
+	defer s.stdout.Sync()
+	return s.stdout.Write(p)
+}
+
 func TestPluginLoad(t *testing.T) {
 	ctx := plugin.NewContext()
-	ctx.StdOut = os.Stdout
+	ctx.LogOut = &StdOut{stdout: os.Stdout}
 	ctx.Conf = &Metadata{}
 	_, _ = ctx.Conf.Write([]byte("这就是配置文件"))
-	path,_ := os.Getwd()
+	path, _ := os.Getwd()
 	ctx.Register(path + "/plugins/upload")
+	ctx.Register(path + "/plugins/web_config")
+	ctx.SetState(plugin.Init)
+	ctx.SetState(plugin.BStart)
 	ctx.SetState(plugin.BCallBack)
 }
