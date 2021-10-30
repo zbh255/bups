@@ -17,9 +17,9 @@ type Logger interface {
 	Panic(err error)
 }
 
-func New(write io.Writer,prefix string) Logger {
+func New(write io.Writer, prefix string) Logger {
 	return &loggerImpl{
-		logger: log.New(write,"Error",log.LstdFlags),
+		logger: log.New(write, "Error", log.LstdFlags),
 		prefix: prefix,
 	}
 }
@@ -53,4 +53,3 @@ func (l *loggerImpl) Panic(err error) {
 	l.logger.SetPrefix(l.prefix + ".Panic:")
 	l.logger.Panic(err)
 }
-

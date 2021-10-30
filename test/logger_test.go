@@ -7,7 +7,7 @@ import (
 )
 
 func TestLogger(t *testing.T) {
-	log := logger.New(os.Stdout,"Main")
+	log := logger.New(os.Stdout, "Main")
 	log.Info("lll")
 	log.Debug("ddd")
 	defer func() {
