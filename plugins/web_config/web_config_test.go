@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/abingzo/bups/common/logger"
 	"io"
 	"os"
 	"strings"
@@ -10,7 +11,7 @@ import (
 func TestConfWebReadWrite(t *testing.T) {
 	webConfig := New()
 	webConfig.SetStdout(os.Stdout)
-	webConfig.SetLogOut(os.Stdout)
+	webConfig.SetLogOut(logger.New(os.Stdout, "Plugin.web_config"))
 	t.Log(os.Args)
 	file, err := os.OpenFile("../../conf/dev/config.toml", os.O_RDWR|os.O_SYNC, 0777)
 	if err != nil {

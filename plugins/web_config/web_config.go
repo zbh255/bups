@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"github.com/abingzo/bups/common/config"
+	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -28,7 +29,7 @@ func New() plugin.Plugin {
 
 type WebConfig struct {
 	stdOut     io.Writer
-	logOut     io.Writer
+	logOut     logger.Logger
 	name       string
 	typ        plugin.Type
 	support    []int
@@ -41,7 +42,7 @@ func (w *WebConfig) SetStdout(out io.Writer) {
 	w.stdOut = out
 }
 
-func (w *WebConfig) SetLogOut(out io.Writer) {
+func (w *WebConfig) SetLogOut(out logger.Logger) {
 	w.logOut = out
 }
 
@@ -75,6 +76,7 @@ func (w *WebConfig) Start(args []string) {
 	flag.Parse()
 	if *sw == "off" {
 		_, _ = w.stdOut.Write([]byte("off\n"))
+		w.logOut.Info("off")
 		return
 	}
 	gin.DefaultWriter = w.stdOut

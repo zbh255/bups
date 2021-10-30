@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"io"
@@ -70,7 +71,7 @@ func (d *Daemon) SetStdout(writer io.Writer) {
 	d.stdOut = writer
 }
 
-func (d *Daemon) SetLogOut(writer io.Writer) {
+func (d *Daemon) SetLogOut(logger logger.Logger) {
 	return
 }
 

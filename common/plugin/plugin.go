@@ -2,6 +2,8 @@
 package plugin
 
 import (
+	"fmt"
+	"github.com/abingzo/bups/common/logger"
 	"io"
 	p "plugin"
 	"sync"
@@ -41,7 +43,7 @@ type Plugin interface {
 	GetType() Type
 	GetSupport() []int
 	SetStdout(writer io.Writer)
-	SetLogOut(writer io.Writer)
+	SetLogOut(writer logger.Logger)
 	ConfRead(reader io.Reader)
 	ConfWrite(writer io.Writer)
 }
@@ -87,7 +89,8 @@ func (c *Context) Register(s string) {
 		case SupportArgs:
 			c.argsPlugin = append(c.argsPlugin, regPlugin)
 		case SupportLogger:
-			regPlugin.SetStdout(c.LogOut)
+			log := logger.New(c.LogOut, fmt.Sprintf("Plugin.%s", regPlugin.GetName()))
+			regPlugin.SetLogOut(log)
 		case SupportConfigRead:
 			regPlugin.ConfRead(c.Conf)
 		case SupportConfigWrite:

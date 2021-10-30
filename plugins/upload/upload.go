@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/abingzo/bups/common/config"
+	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/tencentyun/cos-go-sdk-v5"
@@ -125,7 +126,7 @@ type Upload struct {
 	confWriter io.Writer
 	Support    []int
 	stdout     io.Writer
-	loggerOut  io.Writer
+	loggerOut  logger.Logger
 	cosElement *CosElement
 }
 
@@ -133,7 +134,7 @@ func (u *Upload) SetStdout(out io.Writer) {
 	u.stdout = out
 }
 
-func (u *Upload) SetLogOut(out io.Writer) {
+func (u *Upload) SetLogOut(out logger.Logger) {
 	u.loggerOut = out
 }
 
@@ -184,7 +185,7 @@ func (u *Upload) Start(args []string) {
 		}
 		// 打印消息
 		_, _ = u.stdout.Write([]byte(fmt.Sprintf("%s 下载成功\n", *downloadFileName)))
-		_, _ = u.loggerOut.Write([]byte(fmt.Sprintf("%s 下载成功\n", *downloadFileName)))
+		u.loggerOut.Info(fmt.Sprintf("%s 下载成功\n", *downloadFileName))
 	} else if *searchFileName != "" {
 
 	}
