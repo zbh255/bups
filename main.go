@@ -6,6 +6,7 @@ import (
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"os"
+	"time"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 	ctx := plugin.NewContext()
 	ctx.LogOut = os.Stdout
 	// 提供配置文件
-	cfg, err := os.OpenFile(path.PathConfigFile, os.O_WRONLY|os.O_RDONLY|os.O_SYNC, 0777)
+	cfg, err := os.OpenFile(path.PathConfigFile, os.O_RDWR|os.O_SYNC, 0777)
 	if err != nil {
 		panic(err)
 	}
@@ -39,7 +40,19 @@ func main() {
 	for k, v := range fnTable {
 		v(path.PathPluginFileFolder + "/" + k)
 	}
+	// 处理参数，如果有插件需要，则交给该插件
+	if ArgsProcess(ctx) {
+		return
+	}
+	// 没有参数处理的情况下则通过调度器直接启动程序
 	// 启动初始化插件
 	ctx.SetState(plugin.Init)
-	// 并发处理参数，如果有插件需要，则交给该插件
+	for {
+		timer := time.After(time.Duration(mainConf.LoppTime) * time.Hour)
+		select {
+		case <-timer:
+			ctx.SetState(plugin.BStart)
+			ctx.SetState(plugin.BCallBack)
+		}
+	}
 }
