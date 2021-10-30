@@ -50,12 +50,15 @@ type Plugin interface {
 type New func() Plugin
 
 type Context struct {
-	lock      sync.Mutex
-	start     plugins
-	init      plugins
-	bCallBack plugins
-	support   map[string][]int
-	Conf      io.ReadWriteCloser
+	lock sync.Mutex
+	// 可以处理参数的插件
+	// 该哨兵属性免去了if
+	argsPlugin plugins
+	start      plugins
+	init       plugins
+	bCallBack  plugins
+	support    map[string][]int
+	Conf       io.ReadWriteCloser
 	// 共享的日志输出
 	LogOut io.Writer
 	// 共享的缓冲输出
@@ -82,7 +85,7 @@ func (c *Context) Register(s string) {
 	for _, v := range c.support[regPlugin.GetName()] {
 		switch v {
 		case SupportArgs:
-			continue
+			c.argsPlugin = append(c.argsPlugin, regPlugin)
 		case SupportLogger:
 			regPlugin.SetStdout(c.LogOut)
 		case SupportConfigRead:
@@ -127,6 +130,34 @@ func (c *Context) SetState(s Type) {
 		v.Start(nil)
 	}
 	c.state = s
+}
+
+// RangeArgsPlugin 遍历支持参数的插件列表
+func (c *Context) RangeArgsPlugin(fn func(k int, v Plugin)) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	for k, v := range c.argsPlugin {
+		fn(k, v)
+	}
+}
+
+// RangeAllPlugin 遍历所有注册的插件
+func (c *Context) RangeAllPlugin(fn func(k int, v Plugin)) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	k := 0
+	for _, v := range c.init {
+		fn(k, v)
+		k++
+	}
+	for _, v := range c.start {
+		fn(k, v)
+		k++
+	}
+	for _, v := range c.bCallBack {
+		fn(k, v)
+		k++
+	}
 }
 
 func (c *Context) GetState() Type {
