@@ -2,8 +2,9 @@
 package path
 
 const (
-	PathConfigFile       = "./config/config.toml"
-	PathPluginFileFolder = "./plugins"
-	PathBackUpCache      = "./cache"
-	PathAppLocationLog   = "./log"
+	PathConfigFile       = "./config/config.toml"           // 配置文件的路径
+	PathPluginFileFolder = "./plugins"                      // 插件的放置文件夹
+	PathBackUpCache      = "./cache"                        // 缓存的数据放置文件夹
+	PathAppLocationLog   = "./log"                          // 日志文件的放置文件夹
+	AppLogFilePath       = PathAppLocationLog + "/bups.log" // 日志文件的路径
 )

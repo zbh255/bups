@@ -16,9 +16,15 @@ func main() {
 			fmt.Print(err)
 		}
 	}()
+
 	// 注册插件
 	ctx := plugin.NewContext()
-	ctx.LogOut = os.Stdout
+	// 准备日志文件
+	file, err := os.OpenFile(path.AppLogFilePath, os.O_APPEND|os.O_SYNC, 0777)
+	if err != nil {
+		file = createAppLogFile()
+	}
+	ctx.LogOut = file
 	// 提供配置文件
 	cfg, err := os.OpenFile(path.PathConfigFile, os.O_RDWR|os.O_SYNC, 0777)
 	if err != nil {
@@ -51,8 +57,17 @@ func main() {
 		timer := time.After(time.Duration(mainConf.LoppTime) * time.Hour)
 		select {
 		case <-timer:
-			ctx.SetState(plugin.BStart)
+			ctx.SetState(plugin.BCollect)
 			ctx.SetState(plugin.BCallBack)
 		}
 	}
+}
+
+// 创建文件失败则panic
+func createAppLogFile() *os.File {
+	file, err := os.OpenFile(path.AppLogFilePath, os.O_CREATE|os.O_SYNC|os.O_APPEND, 0777)
+	if err != nil {
+		panic(err)
+	}
+	return file
 }
