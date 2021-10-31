@@ -52,6 +52,7 @@ func TestPluginLoad(t *testing.T) {
 	ctx.Register(path + "/plugins/upload")
 	ctx.Register(path + "/plugins/web_config")
 	ctx.SetState(plugin.Init)
-	ctx.SetState(plugin.BStart)
+	ctx.SetState(plugin.BCollect)
+	ctx.SetState(plugin.BHandle)
 	ctx.SetState(plugin.BCallBack)
 }

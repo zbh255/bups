@@ -11,14 +11,13 @@ import (
 
 type Type int
 
-// Init 初始化时调用的插件
-const Init Type = 0
-
-// BStart 单次备份开始调用的插件
-const BStart Type = 1
-
-// BCallBack 备份完毕调用的插件
-const BCallBack Type = 2
+// 描述插件生命周期的常量
+const (
+	Init      Type = 0 // 初始化时调用的插件
+	BCollect  Type = 1 // 需要搜集备份数据时调用的插件
+	BHandle   Type = 2 // 需要处理备份的数据时调用的插件
+	BCallBack Type = 3 // 处理完备份数据时调用的插件
+)
 
 // 插件需要的支持
 const (
@@ -56,7 +55,8 @@ type Context struct {
 	// 可以处理参数的插件
 	// 该哨兵属性免去了if
 	argsPlugin plugins
-	start      plugins
+	collect    plugins
+	handle     plugins
 	init       plugins
 	bCallBack  plugins
 	support    map[string][]int
@@ -105,10 +105,12 @@ func (c *Context) Register(s string) {
 	switch regPlugin.GetType() {
 	case Init:
 		c.init = append(c.init, regPlugin)
-	case BStart:
-		c.start = append(c.start, regPlugin)
+	case BCollect:
+		c.collect = append(c.collect, regPlugin)
 	case BCallBack:
 		c.bCallBack = append(c.bCallBack, regPlugin)
+	case BHandle:
+		c.handle = append(c.handle,regPlugin)
 	default:
 		panic("not support plugin type")
 	}
@@ -119,12 +121,14 @@ func (c *Context) SetState(s Type) {
 	defer c.lock.Unlock()
 	dst := make(plugins, 0, 10)
 	switch s {
-	case BStart:
-		dst = append(c.start)
+	case BCollect:
+		dst = append(c.collect)
 	case Init:
 		dst = append(c.init)
 	case BCallBack:
 		dst = append(c.bCallBack)
+	case BHandle:
+		dst = append(c.handle)
 	default:
 		panic("not support state type")
 	}
@@ -153,8 +157,12 @@ func (c *Context) RangeAllPlugin(fn func(k int, v Plugin)) {
 		fn(k, v)
 		k++
 	}
-	for _, v := range c.start {
+	for _, v := range c.collect {
 		fn(k, v)
+		k++
+	}
+	for _, v := range c.handle {
+		fn(k,v)
 		k++
 	}
 	for _, v := range c.bCallBack {
