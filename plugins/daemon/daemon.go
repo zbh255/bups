@@ -39,6 +39,9 @@ type Daemon struct {
 }
 
 func (d *Daemon) Start(args []string) {
+	if args == nil {
+		return
+	}
 	os.Args = args
 	// st是启动参数
 	st := flag.String("s", "", "start(启动) restart(重启) stop(停止)")

@@ -170,8 +170,9 @@ func (u *Upload) Start(args []string) {
 			panic(err)
 		}
 		return
+	} else {
+		os.Args = args
 	}
-	os.Args = args
 	downloadFileName := flag.String("download", "", "需要下载的文件名")
 	searchFileName := flag.String("search", "", "需要搜索的文件名")
 	if *downloadFileName != "" {

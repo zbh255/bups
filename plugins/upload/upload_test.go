@@ -9,7 +9,7 @@ import (
 
 func TestPluginLoadAndStart(t *testing.T) {
 	uploadPg := New()
-	configFile, err := os.Open("../../conf/dev/config.toml")
+	configFile, err := os.Open("../../config/dev/config.toml")
 	if err != nil {
 		panic(err)
 	}

@@ -17,7 +17,12 @@ const (
 )
 
 // 插件需要的支持
-var support = []int{plugin.SupportNativeStdout, plugin.SupportArgs, plugin.SupportConfigWrite, plugin.SupportConfigRead}
+var support = []int{plugin.SupportNativeStdout,
+	plugin.SupportLogger,
+	plugin.SupportArgs,
+	plugin.SupportConfigWrite,
+	plugin.SupportConfigRead,
+}
 
 func New() plugin.Plugin {
 	return &WebConfig{
@@ -68,6 +73,10 @@ func (w *WebConfig) ConfWrite(writer io.Writer) {
 
 // Start 启动函数
 func (w *WebConfig) Start(args []string) {
+	// args不为nil时代表参数启动
+	if args == nil {
+		return
+	}
 	os.Args = args
 	_ = flag.CommandLine.Parse(args)
 	// 处理参数
@@ -75,7 +84,6 @@ func (w *WebConfig) Start(args []string) {
 	bind := flag.String("bind", "127.0.0.1:8080", "web_config绑定的ip&port")
 	flag.Parse()
 	if *sw == "off" {
-		_, _ = w.stdOut.Write([]byte("off\n"))
 		w.logOut.Info("off")
 		return
 	}
