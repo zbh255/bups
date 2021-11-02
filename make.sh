@@ -13,17 +13,17 @@ export Recover_APP_CMD='./cmd/recover_application'
 
 # 变量
 build_path="./_bulid_release"
-build_path_config=$build_path'/conf/dev'
-project_path_config='./conf/dev'
+build_path_config=$build_path'/config/dev'
+project_path_config='./config/dev'
 conf_name='/config.toml' #配置文件名称
 if [ $BUPS_MODE == 'debug' ]
 then
-    build_path_config=$build_path'/conf/dev'
-    project_path_config='./conf/dev'
+    build_path_config=$build_path'/config/dev'
+    project_path_config='./config/dev'
 elif [ $BUPS_MODE == 'release' ]
 then
-    project_path_config='./conf/pro'
-    build_path_config=$build_path'/conf/pro'
+    project_path_config='./config/pro'
+    build_path_config=$build_path'/config/pro'
 fi
 
 build_path_data=$build_path'/data'
