@@ -23,6 +23,7 @@ func ArgsProcess(ctx *plugin.Context) bool {
 	pluginName := flag.String("plugin", "", "调用的插件的名字")
 	pluginArgs := flag.String("args", "", "传递的插件参数，比如:'<--s stop>'")
 	option := flag.String("option", "", "应用程序选项: pluginInstallList 列出所有安装的插件")
+	flag.Parse()
 	switch *option {
 	case "pluginInstallList":
 		tag = true
@@ -35,7 +36,6 @@ func ArgsProcess(ctx *plugin.Context) bool {
 		tag = true
 		break
 	}
-	flag.Parse()
 	// 需要处理传递给插件的参数
 	if *pluginName != "" && *pluginArgs != "" {
 		// 找到接收的插件
