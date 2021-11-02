@@ -1,5 +1,5 @@
 test/plugins
 .idea/*
 plugins/*/main.go
-./build_release/*
-./build_debug/*
+build_debug
+build_release
