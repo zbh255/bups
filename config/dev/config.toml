@@ -6,8 +6,17 @@ lopp_time = 7200
 
 # 插件的配置由plugin.name.case组成,比如plugin.backup.file_path
 [plugin.backup.file_path]
-    log = "./log"
-    static = "./static"
+    # 项目根路径
+    root = "/User/harder/html"
+    # 静态资源的路径
+    static = "/User/harder/static"
+[plugin.backup.database]
+    driver = "mysql"
+    host = "localhost"
+    port = "3306"
+    user = "harder"
+    password = "83nnfd.."
+    databases = ["youyu"]
 [plugin.upload.cos]
     sId = "1"
     sKey = "1"
