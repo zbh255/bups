@@ -76,7 +76,7 @@ func (c *Context) Register(s string) {
 	if err != nil {
 		panic(err)
 	}
-	// 调佣
+	// 调用
 	interFace, err := pg.Lookup("New")
 	if err != nil {
 		panic(err)
@@ -110,7 +110,7 @@ func (c *Context) Register(s string) {
 	case BCallBack:
 		c.bCallBack = append(c.bCallBack, regPlugin)
 	case BHandle:
-		c.handle = append(c.handle,regPlugin)
+		c.handle = append(c.handle, regPlugin)
 	default:
 		panic("not support plugin type")
 	}
@@ -162,7 +162,7 @@ func (c *Context) RangeAllPlugin(fn func(k int, v Plugin)) {
 		k++
 	}
 	for _, v := range c.handle {
-		fn(k,v)
+		fn(k, v)
 		k++
 	}
 	for _, v := range c.bCallBack {
