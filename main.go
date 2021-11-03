@@ -6,6 +6,8 @@ import (
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -23,6 +25,20 @@ func main() {
 	if ArgsProcess(ctx) {
 		return
 	}
+	// 正常启动的情况下接收信号，并将通知信号派发给插件
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGQUIT, syscall.SIGKILL, syscall.SIGINT)
+		switch v := <-c; v {
+		case syscall.SIGQUIT, syscall.SIGKILL, syscall.SIGINT:
+			ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
+				v.Caller(plugin.Exit)
+			})
+			os.Exit(0)
+		}
+	}()
+	// TODO:解决初始化正常却无法打印日志的问题
+
 	// 没有参数处理的情况下则通过调度器直接启动程序
 	// 启动初始化插件
 	ctx.SetState(plugin.Init)
@@ -35,13 +51,4 @@ func main() {
 			ctx.SetState(plugin.BCallBack)
 		}
 	}
-}
-
-// 创建文件失败则panic
-func createAppLogFile(logFilePath string) *os.File {
-	file, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_SYNC|os.O_APPEND, 0777)
-	if err != nil {
-		panic(err)
-	}
-	return file
 }
