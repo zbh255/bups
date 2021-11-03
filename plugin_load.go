@@ -10,13 +10,15 @@ import (
 func LoadPlugin(pluginPh, logFilePath, configFilePath string) *plugin.Context {
 	// 注册插件
 	ctx := plugin.NewContext()
-	// 准备日志文件
-	file, err := os.OpenFile(logFilePath, os.O_APPEND|os.O_SYNC, 0777)
-	if err != nil {
-		file = createAppLogFile(logFilePath)
+	var ReadLogFile = func() *os.File {
+		// 准备日志文件
+		file, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
+		if err != nil {
+			panic(err)
+		}
+		return file
 	}
-	defer file.Close()
-	ctx.LogOut = file
+	ctx.LogOut = ReadLogFile
 	ctx.StdOut = os.Stdout
 	// 提供配置文件
 	cfg, err := os.OpenFile(configFilePath, os.O_RDWR, 0777)

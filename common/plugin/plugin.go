@@ -2,14 +2,15 @@
 package plugin
 
 import (
-	"fmt"
 	"github.com/abingzo/bups/common/logger"
 	"io"
+	"os"
 	p "plugin"
 	"sync"
 )
 
 type Type int
+type Single int
 
 // 描述插件生命周期的常量
 const (
@@ -33,11 +34,18 @@ const (
 	SupportNativeStdout
 )
 
+// 插件接收的信号
+const (
+	// Exit 退出
+	Exit Single = iota
+)
+
 type plugins []Plugin
 
 // Plugin 插件的插入要实现的接口
 type Plugin interface {
 	Start(args []string)
+	Caller(single Single)
 	GetName() string
 	GetType() Type
 	GetSupport() []int
@@ -61,8 +69,8 @@ type Context struct {
 	bCallBack  plugins
 	support    map[string][]int
 	Conf       io.ReadWriteCloser
-	// 共享的日志输出
-	LogOut io.Writer
+	// 插件不能共享同一个fd,所以需要多个fd以满足日志
+	LogOut func() *os.File
 	// 共享的缓冲输出
 	StdOut io.Writer
 	// 状态的流转，每流入一个状态时则调用对应的插件启动函数
@@ -81,7 +89,10 @@ func (c *Context) Register(s string) {
 	if err != nil {
 		panic(err)
 	}
-	regPlugin := interFace.(func() Plugin)()
+	c.register(interFace.(func() Plugin)())
+}
+
+func (c *Context) register(regPlugin Plugin) {
 	c.support[regPlugin.GetName()] = regPlugin.GetSupport()
 	// 实现对应的支持
 	for _, v := range c.support[regPlugin.GetName()] {
@@ -89,7 +100,7 @@ func (c *Context) Register(s string) {
 		case SupportArgs:
 			c.argsPlugin = append(c.argsPlugin, regPlugin)
 		case SupportLogger:
-			log := logger.New(c.LogOut, fmt.Sprintf("Plugin.%s", regPlugin.GetName()))
+			log := logger.New(c.LogOut(), "Plugin."+regPlugin.GetName()).(*logger.LoggerImpl)
 			regPlugin.SetLogOut(log)
 		case SupportConfigRead:
 			regPlugin.ConfRead(c.Conf)
