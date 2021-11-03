@@ -21,6 +21,7 @@ import (
 func ArgsProcess(ctx *plugin.Context) bool {
 	tag := false
 	pluginName := flag.String("plugin", "", "调用的插件的名字")
+	caller := flag.String("caller", "", "直接调用一个插件,没有参数传递")
 	pluginArgs := flag.String("args", "", "传递的插件参数，比如:'<--s stop>'")
 	option := flag.String("option", "", "应用程序选项: pluginInstallList 列出所有安装的插件")
 	flag.Parse()
@@ -43,6 +44,13 @@ func ArgsProcess(ctx *plugin.Context) bool {
 		ctx.RangeArgsPlugin(func(k int, v plugin.Plugin) {
 			if v.GetName() == *pluginName {
 				v.Start(MainAppArgsToPlugin(*pluginArgs))
+			}
+		})
+	} else if *caller != "" {
+		tag = true
+		ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
+			if v.GetName() == *caller {
+				v.Start(nil)
 			}
 		})
 	}
