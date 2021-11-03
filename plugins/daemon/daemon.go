@@ -38,6 +38,10 @@ type Daemon struct {
 	plugin.Plugin
 }
 
+func (d *Daemon) Caller(s plugin.Single) {
+	_, _ = d.stdOut.Write([]byte(Name + ".Caller"))
+}
+
 func (d *Daemon) Start(args []string) {
 	if args == nil {
 		return

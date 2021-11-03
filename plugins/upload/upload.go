@@ -158,6 +158,10 @@ func (u *Upload) ConfWrite(writer io.Writer) {
 	u.confWriter = writer
 }
 
+func (u *Upload) Caller(s plugin.Single) {
+	u.loggerOut.Info(Name + ".Caller")
+}
+
 // Start 启动函数
 func (u *Upload) Start(args []string) {
 	// 初始化实例

@@ -71,6 +71,10 @@ func (w *WebConfig) ConfWrite(writer io.Writer) {
 	w.confWriter = writer
 }
 
+func (w *WebConfig) Caller(s plugin.Single) {
+	w.logOut.Info(Name + ".Caller")
+}
+
 // Start 启动函数
 func (w *WebConfig) Start(args []string) {
 	// args不为nil时代表参数启动
