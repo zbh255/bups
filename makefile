@@ -5,11 +5,21 @@ GOGET=$(GOCMD) get
 GOTEST=$(GOCMD) test
 GOMOD=$(GOCMD) mod
 BINARY_MAIN_NAME=bups
-
+VERSION = 0.21
 
 # Source
 build_path = ./build_release
 plugin_path = ./plugins
+
+# build app info
+# 需要写入的版本信息
+gitTag=$(shell if [ "`git describe --tags --abbrev=0 2>/dev/null`" != "" ];then git describe --tags --abbrev=0; else git log --pretty=format:'%h' -n 1; fi)
+gitBranch=$(shell git rev-parse --abbrev-ref HEAD)
+buildDate=$(shell TZ=Asia/Shanghai date +%FT%T%z)
+gitCommit=$(shell git rev-parse --short HEAD)
+gitTreeState=$(shell if git status|grep -q 'clean';then echo clean; else echo dirty; fi)
+
+ldflags="-s -w -X main.gitTag=${gitTag} -X main.buildDate=${buildDate} -X main.gitCommit=${gitCommit} -X main.gitTreeState=${gitTreeState} -X main.version=${VERSION} -X main.gitBranch=${gitBranch}"
 
 source:
 	mkdir -p $(build_path)/cache $(build_path)/plugins $(build_path)/log $(build_path)/config
@@ -23,7 +33,7 @@ build-plugins:
 	  	echo $$str | awk '{len=split($$0,a,"/");print a[len] > "./tmp.txt"}' ;\
         tmp=$$(cat ./tmp.txt) ;\
         echo '插件:'$$tmp':编译中' ;\
-	  	$(GOBUILD) -buildmode=plugin -o $$tmp.so $$str/$$tmp.go;\
+	  	$(GOBUILD) -buildmode=plugin -gcflags="all=-N -l" -o $$tmp.so $$str/$$tmp.go;\
 	  	echo '插件:'$$tmp':编译完成' ;\
 		mv ./$$tmp.so $(build_path)/plugins;\
 	done
@@ -36,7 +46,7 @@ build-darwin:build-plugins
 build-darwin:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
-	@$(GOBUILD) -o $(BINARY_MAIN_NAME) ./
+	@$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
 	# 移动编译之后的文件
 	@mv ./$(BINARY_MAIN_NAME) $(build_path)
 
@@ -48,6 +58,6 @@ build-linux:build-plugins
 build-linux:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
-	@$(GOBUILD) -o $(BINARY_MAIN_NAME) ./
+	@$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
 	# 移动编译之后的文件
 	@mv ./$(BINARY_MAIN_NAME) $(build_path)
