@@ -44,14 +44,23 @@ type plugins []Plugin
 
 // Plugin 插件的插入要实现的接口
 type Plugin interface {
+	// Start 插件启动时调用的方法
 	Start(args []string)
+	// Caller 接收到信号时调用的方法
 	Caller(single Single)
+	// GetName 主程序获取插件的名字
 	GetName() string
+	// GetType 主程序获取插件的类型
 	GetType() Type
+	// GetSupport 主程序获取插件需要的支持
 	GetSupport() []int
+	// SetStdout 设置Stdout
 	SetStdout(writer io.Writer)
+	// SetLogOut 设置日志接口
 	SetLogOut(writer logger.Logger)
+	// ConfRead 设置配置文件的读取接口
 	ConfRead(reader io.Reader)
+	// ConfWrite 设置配置文件的写入接口
 	ConfWrite(writer io.Writer)
 }
 

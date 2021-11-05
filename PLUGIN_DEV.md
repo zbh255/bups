@@ -1,49 +1,9 @@
-# bups
-
-![Go Report Card](https://goreportcard.com/badge/github.com/abingzo/bups) ![GitHub](https://img.shields.io/github/license/abingzo/bups)
-
-一个Go语言写的用于备份Wordpress/Typecho网站数据至云端的小工具，支持自定义插件，目前只支持**`linux`&`darwin`**
-
----
-
-#### 构建
-
-```shell
-make build-linux
-```
-
-#### 基本配置
-
----
-
-- [Config](./CONFIG.md)
-
-#### 启动
-
----
-
-```shell
-./bups
-```
-
-使用自带的守护进程插件
-
-```shell
-./bups --plugin daemon --args '<-s start>'
-```
-
-#### 编写自己的插件
-
----
-
+# 插件的开发文档
 > 首先，插件是使用原生的`plugin`构建的，插件内部要实现的原型函数
-
 ```go
 type New func() Plugin
 ```
-
 > 该原型函数返回的是`common.plugin.Plugin`接口，接口的定义如下
-
 ```go
 type Plugin interface {
 	// Start 插件启动时调用的方法
