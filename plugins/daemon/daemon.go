@@ -92,7 +92,7 @@ func (d *Daemon) ConfWrite(writer io.Writer) {
 
 func pidFileExist() bool {
 	info, err := os.Stat(PidFile)
-	if err != nil || !info.IsDir() {
+	if err != nil || info.IsDir() {
 		return false
 	}
 	return true
