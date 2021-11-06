@@ -1,4 +1,5 @@
-//+build linux darwin
+//go:build linux || darwin
+// +build linux darwin
 
 package main
 
@@ -46,5 +47,3 @@ func GetInfo() *Info {
 		Platform:     fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),
 	}
 }
-
-

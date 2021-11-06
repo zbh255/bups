@@ -3,3 +3,6 @@ test/plugins
 plugins/*/main.go
 build_debug
 build_release
+bups-darwin
+bups-linux
+bups-*.zip

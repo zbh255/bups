@@ -37,9 +37,9 @@ func ArgsProcess(ctx *plugin.Context) bool {
 	case "version":
 		tag = true
 		v := GetInfo()
-		bytes,err := json.MarshalIndent(v,"","\t")
+		bytes, err := json.MarshalIndent(v, "", "\t")
 		if err != nil {
-			fmt.Printf("%s",err.Error())
+			fmt.Printf("%s", err.Error())
 		} else {
 			fmt.Print(string(bytes))
 		}
