@@ -15,11 +15,24 @@ func main() {
 	// 处理错误
 	defer func() {
 		if err := recover(); err != nil {
-			fmt.Print(err)
+			stack := stack(3)
+			fmt.Printf("PANIC: %s\n%s", err, stack)
 		}
 	}()
 
 	ctx := LoadPlugin(path.PathPluginFileFolder, path.AppLogFilePath, path.PathConfigFile)
+	// 为插件准备存放文件的文件夹，已存在则不创建
+	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
+		info,err := os.Stat(path.PathBackUpCache + "/" + v.GetName())
+		if err == nil && info.IsDir() {
+			return
+		}
+		// 不存在则创建
+		err = os.MkdirAll(path.PathBackUpCache+"/"+v.GetName(), 0755)
+		if err != nil {
+			panic(err)
+		}
+	})
 	mainConf := config.Read(ctx.Conf).Main
 	// 处理参数，如果有插件需要，则交给该插件
 	if ArgsProcess(ctx) {
