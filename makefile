@@ -21,6 +21,9 @@ gitTreeState=$(shell if git status|grep -q 'clean';then echo clean; else echo di
 
 ldflags="-s -w -X main.gitTag=${gitTag} -X main.buildDate=${buildDate} -X main.gitCommit=${gitCommit} -X main.gitTreeState=${gitTreeState} -X main.version=${VERSION} -X main.gitBranch=${gitBranch}"
 
+clean:
+	@rm -rf $(build_path)
+
 source:
 	mkdir -p $(build_path)/cache $(build_path)/plugins $(build_path)/log $(build_path)/config
 	touch $(build_path)/log/bups.log
