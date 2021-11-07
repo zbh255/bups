@@ -1,6 +1,6 @@
 [main]
 # 安装的插件
-install = ["backup.so","upload.so","web_config.so","daemon.so"]
+install = ["backup.so","upload.so","web_config.so","daemon.so","encrypt.so"]
 # 循环的时间，即备份开始的时间
 lopp_time = 7200
 

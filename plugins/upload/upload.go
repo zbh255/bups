@@ -14,12 +14,13 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
+	"time"
 )
 
 const (
 	Name           = "upload"
 	DownloadCached = path.PathBackUpCache + "/download"
+	BackUpFilePath = path.PathBackUpCache + "/encrypt/backup.zip"
 	Type           = plugin.BCallBack
 )
 
@@ -87,8 +88,8 @@ func (c *CosElement) Push(path string) error {
 	if err != nil {
 		return err
 	}
-	tmpContainer := strings.Split(path, "/")
-	fileName := tmpContainer[len(tmpContainer)]
+	// 根据备份的时间取名
+	fileName := time.Now().Format("2006-01-01-15-04") + ".zip"
 	_, err = c.client.Object.Put(context.Background(), fileName, file, nil)
 	if err != nil {
 		return err
@@ -169,10 +170,12 @@ func (u *Upload) Start(args []string) {
 		InitCosElement(u)
 	}
 	if args == nil || len(args) == 0 {
-		err := u.cosElement.Push(path.PathBackUpCache + "/backup/backup.zip")
+		err := u.cosElement.Push(BackUpFilePath)
 		if err != nil {
 			panic(err)
 		}
+		// 上传成功则打印日志
+		u.loggerOut.Info("upload cos successfully")
 		return
 	} else {
 		os.Args = args
