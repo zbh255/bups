@@ -5,7 +5,7 @@ GOGET=$(GOCMD) get
 GOTEST=$(GOCMD) test
 GOMOD=$(GOCMD) mod
 BINARY_MAIN_NAME=bups
-VERSION = 0.21
+
 
 # Source
 build_path = ./build_release
@@ -19,7 +19,7 @@ buildDate=$(shell TZ=Asia/Shanghai date +%FT%T%z)
 gitCommit=$(shell git rev-parse --short HEAD)
 gitTreeState=$(shell if git status|grep -q 'clean';then echo clean; else echo dirty; fi)
 
-ldflags="-s -w -X main.gitTag=${gitTag} -X main.buildDate=${buildDate} -X main.gitCommit=${gitCommit} -X main.gitTreeState=${gitTreeState} -X main.version=${VERSION} -X main.gitBranch=${gitBranch}"
+ldflags="-s -w -X main.buildDate=${buildDate} -X main.gitCommit=${gitCommit} -X main.gitTreeState=${gitTreeState} -X main.version=${gitTag} -X main.gitBranch=${gitBranch}"
 
 clean:
 	@rm -rf $(build_path)
