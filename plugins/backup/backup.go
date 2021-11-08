@@ -60,11 +60,9 @@ func (b *Backup) Caller(s plugin.Single) {
 func (b *Backup) Start(args []string) {
 	if args != nil || len(args) != 0 {
 		os.Args = args
-	}
-	debugIf := flag.Bool("debug", false, "是否开启调试模式")
-	flag.Parse()
-	if *debugIf {
-		debugShow = true
+		debugIf := flag.Bool("debug", false, "是否开启调试模式")
+		flag.Parse()
+		debugShow = *debugIf
 	}
 	b.backupFile()
 	b.backupDatabase()

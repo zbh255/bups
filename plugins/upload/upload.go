@@ -89,7 +89,7 @@ func (c *CosElement) Push(path string) error {
 		return err
 	}
 	// 根据备份的时间取名
-	fileName := time.Now().Format("2006-01-01-15-04") + ".zip"
+	fileName := time.Now().Format("2006-01-02-15-04") + ".zip"
 	_, err = c.client.Object.Put(context.Background(), fileName, file, nil)
 	if err != nil {
 		return err
