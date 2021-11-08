@@ -32,6 +32,28 @@ make build-linux
 ./bups --plugin daemon --args '<-s start>'
 ```
 
+`Supervisor`启动，将`/Users/xx`替换为程序所在的绝对路径，[原模板文件](./bupsd.ini)
+
+```ini
+[program:bupsd]
+# run folder
+directory=/Users/xx
+# run command
+command=/Users/xx/bups
+
+autostart=true
+autorestart=false
+startsecs=3
+
+user=root
+stdout_logfile=/Users/xx/bups/logs/stdout.log
+redirect_stderr=true
+// stdout log size
+stdout_logfile_maxbytes=30MB
+```
+
+`Systemctl`启动，修改[service模板文件](./bupsd.service)，将模板中的目录改为自己的安装目录即可，**注意：**由于`service`文件的编写时间比较久远可能有问题，这一部分抽时间再改
+
 ### 编写自己的插件
 
 ---
