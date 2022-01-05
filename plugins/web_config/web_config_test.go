@@ -1,4 +1,4 @@
-package main
+package web_config
 
 import (
 	"github.com/abingzo/bups/common/logger"
