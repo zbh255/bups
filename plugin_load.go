@@ -1,13 +1,22 @@
+// +build linux darwin windows
+
 package main
 
 import (
 	"github.com/abingzo/bups/common/config"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/abingzo/bups/ioc"
+	"github.com/abingzo/bups/plugins/backup"
+	"github.com/abingzo/bups/plugins/daemon"
+	"github.com/abingzo/bups/plugins/encrypt"
+	"github.com/abingzo/bups/plugins/recovery"
+	"github.com/abingzo/bups/plugins/upload"
+	"github.com/abingzo/bups/plugins/web_config"
 	"os"
 )
 
-// LoadPlugin 根据目录加载目录下的所有插件
-func LoadPlugin(pluginPh, logFilePath, configFilePath string) *plugin.Context {
+// LoaderPlugin 根据目录加载目录下的所有插件
+func LoaderPlugin(logFilePath, configFilePath string) *plugin.Context {
 	// 注册插件
 	ctx := plugin.NewContext()
 	var ReadLogFile = func() *os.File {
@@ -30,20 +39,26 @@ func LoadPlugin(pluginPh, logFilePath, configFilePath string) *plugin.Context {
 	cfgE := &CFG{}
 	cfgE.Open(cfg)
 	ctx.Conf = cfgE
-	// 注册在配置文件中声明的插件
-	mainConf := config.Read(ctx.Conf).Main
-	fnTable := make(map[string]func(string))
-	for _, v := range mainConf.Install {
-		fnTable[v] = ctx.Register
+	// 读取配置文件，决定加载那些插件
+	mainConfig  := config.Read(ctx.Conf)
+	hashTable := make(map[string]struct{},len(mainConfig.Main.Install))
+	for _,v := range mainConfig.Main.Install {
+		hashTable[v] = struct{}{}
 	}
-	// 优先注册备份插件
-	if fn, ok := fnTable["backup.so"]; ok {
-		fn(pluginPh + "/backup.so")
-		delete(fnTable, "backup.so")
-	}
-	// 注册其他的插件
-	for k, v := range fnTable {
-		v(pluginPh + "/" + k)
+	// 注册插件
+	ioc.RegisterPlugin(backup.New)
+	ioc.RegisterPlugin(daemon.New)
+	ioc.RegisterPlugin(encrypt.New)
+	ioc.RegisterPlugin(recovery.New)
+	ioc.RegisterPlugin(upload.New)
+	ioc.RegisterPlugin(web_config.New)
+	// 加载插件
+	for _,v := range ioc.GetPluginList() {
+		tmpPlg := v()
+		_,ok := hashTable[tmpPlg.GetName()]
+		if ok {
+			ctx.RegisterRaw(tmpPlg)
+		}
 	}
 	return ctx
 }

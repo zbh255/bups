@@ -108,8 +108,8 @@ func TestPluginContextMultiLogger(t *testing.T) {
 		name: "daemon",
 		sup:  []int{SupportLogger, SupportArgs},
 	}
-	ctx.register(backup)
-	ctx.register(daemon)
+	ctx.RegisterRaw(backup)
+	ctx.RegisterRaw(daemon)
 	// Caller
 	ctx.RangeAllPlugin(func(k int, v Plugin) {
 		v.Caller(Exit)

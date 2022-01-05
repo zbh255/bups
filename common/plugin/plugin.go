@@ -98,10 +98,10 @@ func (c *Context) Register(s string) {
 	if err != nil {
 		panic(err)
 	}
-	c.register(interFace.(func() Plugin)())
+	c.RegisterRaw(interFace.(func() Plugin)())
 }
 
-func (c *Context) register(regPlugin Plugin) {
+func (c *Context) RegisterRaw(regPlugin Plugin) {
 	c.support[regPlugin.GetName()] = regPlugin.GetSupport()
 	// 实现对应的支持
 	for _, v := range c.support[regPlugin.GetName()] {
