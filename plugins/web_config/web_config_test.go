@@ -11,7 +11,7 @@ import (
 func TestConfWebReadWrite(t *testing.T) {
 	webConfig := New()
 	webConfig.SetStdout(os.Stdout)
-	webConfig.SetLogOut(logger.New(os.Stdout, "Plugin.web_config"))
+	webConfig.SetLogOut(logger.New(os.Stdout, logger.ERROR))
 	t.Log(os.Args)
 	file, err := os.OpenFile("../../config/dev/config.toml", os.O_RDWR|os.O_SYNC, 0777)
 	if err != nil {

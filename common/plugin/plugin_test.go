@@ -63,22 +63,22 @@ func TestPluginContext(t *testing.T) {
 		return file
 	}
 	pg1 := Plugin(&TestPlugin{})
-	log := logger.New(ctx.LogOut(), fmt.Sprintf("Plugin.%s", pg1.GetName()))
+	log := logger.New(ctx.LogOut(), logger.ERROR)
 	pg1.SetLogOut(log)
 	ctx.init = append(ctx.init, pg1)
 	// 多个插件
 	pg2 := Plugin(&TestPlugin{})
-	log2 := logger.New(ctx.LogOut(), fmt.Sprintf("Plugin.%s", "2"))
+	log2 := logger.New(ctx.LogOut(), logger.ERROR)
 	pg2.SetLogOut(log2)
 	ctx.handle = append(ctx.handle, pg2)
 	// 3
 	pg3 := Plugin(&TestPlugin{})
-	log3 := logger.New(ctx.LogOut(), fmt.Sprintf("Plugin.%s", "3"))
+	log3 := logger.New(ctx.LogOut(), logger.ERROR)
 	pg3.SetLogOut(log3)
 	ctx.collect = append(ctx.collect, pg3)
 	// 4
 	pg4 := Plugin(&TestPlugin{})
-	log4 := logger.New(ctx.LogOut(), fmt.Sprintf("Plugin.%s", "4"))
+	log4 := logger.New(ctx.LogOut(), logger.ERROR)
 	pg4.SetLogOut(log4)
 	ctx.bCallBack = append(ctx.bCallBack, pg4)
 	ctx.RangeAllPlugin(func(k int, v Plugin) {

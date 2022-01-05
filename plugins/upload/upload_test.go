@@ -17,7 +17,7 @@ func TestPluginLoadAndStart(t *testing.T) {
 	uploadPg.ConfRead(configFile)
 	uploadPg.ConfWrite(configFile)
 	uploadPg.SetStdout(os.Stdout)
-	uploadPg.SetLogOut(logger.New(os.Stdout, "Plugin.upload."))
+	uploadPg.SetLogOut(logger.New(os.Stdout, logger.ERROR))
 	// no args
 	uploadPg.Start(nil)
 }

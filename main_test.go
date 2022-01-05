@@ -62,8 +62,8 @@ func TestLogger(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	log := logger.New(logFile, fmt.Sprintf("Plugin.%s", "Test"))
-	stdLog := logger.New(os.Stdout, fmt.Sprintf("Plugin.%s", "Test"))
+	log := logger.New(logFile, logger.ERROR)
+	stdLog := logger.New(os.Stdout, logger.ERROR)
 	log.Info("Handler")
 	log.Info("Handlers")
 	log.Info("Handlers")
@@ -76,8 +76,8 @@ func TestMultiLogger(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	daemonLog := logger.New(logFile, fmt.Sprintf("Plugin.%s", "Daemon"))
-	backupLog := logger.New(logFile, fmt.Sprintf("Plugin.%s", "Backup"))
+	daemonLog := logger.New(logFile, logger.ERROR)
+	backupLog := logger.New(logFile, logger.ERROR)
 	wg := sync.WaitGroup{}
 	wg.Add(400)
 	go func() {

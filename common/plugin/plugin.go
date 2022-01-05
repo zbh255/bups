@@ -109,7 +109,7 @@ func (c *Context) RegisterRaw(regPlugin Plugin) {
 		case SupportArgs:
 			c.argsPlugin = append(c.argsPlugin, regPlugin)
 		case SupportLogger:
-			log := logger.New(c.LogOut(), "Plugin."+regPlugin.GetName()).(*logger.LoggerImpl)
+			log := logger.New(c.LogOut(), logger.ERROR).(*logger.LoggerImpl)
 			regPlugin.SetLogOut(log)
 		case SupportConfigRead:
 			regPlugin.ConfRead(c.Conf)
