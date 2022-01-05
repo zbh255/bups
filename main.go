@@ -20,7 +20,7 @@ func main() {
 		}
 	}()
 
-	ctx := LoadPlugin(path.PathPluginFileFolder, path.AppLogFilePath, path.PathConfigFile)
+	ctx := LoaderPlugin(path.AppLogFilePath, path.PathConfigFile)
 	// 为插件准备存放文件的文件夹，已存在则不创建
 	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
 		info, err := os.Stat(path.PathBackUpCache + "/" + v.GetName())
