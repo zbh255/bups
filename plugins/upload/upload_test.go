@@ -1,7 +1,9 @@
 package upload
 
 import (
+	"github.com/abingzo/bups/common/config"
 	"github.com/abingzo/bups/common/logger"
+	"github.com/abingzo/bups/common/plugin"
 	"log"
 	"os"
 	"testing"
@@ -14,10 +16,13 @@ func TestPluginLoadAndStart(t *testing.T) {
 		panic(err)
 	}
 	log.Writer()
-	uploadPg.ConfRead(configFile)
-	uploadPg.ConfWrite(configFile)
-	uploadPg.SetStdout(os.Stdout)
-	uploadPg.SetLogOut(logger.New(os.Stdout, logger.ERROR))
+	rawSource := new(plugin.Source)
+	rawSource.AccessLog = logger.New(os.Stderr,logger.DEBUG)
+	rawSource.ErrorLog = logger.New(os.Stdout,logger.PANIC)
+	rawSource.StdLog = logger.New(os.Stdout,logger.PANIC)
+	rawSource.RawConfig = configFile
+	rawSource.Config = config.Read(configFile)
+	uploadPg.SetSource(rawSource)
 	// no args
 	uploadPg.Start(nil)
 }

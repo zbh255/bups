@@ -17,11 +17,10 @@ const (
 )
 
 // 插件需要的支持
-var support = []int{plugin.SupportNativeStdout,
-	plugin.SupportLogger,
-	plugin.SupportArgs,
-	plugin.SupportConfigWrite,
-	plugin.SupportConfigRead,
+var support = []uint32{
+	plugin.SUPPORT_STDLOG,
+	plugin.SUPPORT_ARGS,
+	plugin.SUPPORT_RAW_CONFIG,
 }
 
 func New() plugin.Plugin {
@@ -33,22 +32,19 @@ func New() plugin.Plugin {
 }
 
 type WebConfig struct {
-	stdOut     io.Writer
-	logOut     logger.Logger
+	stdLog     logger.Logger
 	name       string
 	typ        plugin.Type
-	support    []int
+	support    []uint32
 	confReader io.Reader
 	confWriter io.Writer
 	plugin.Plugin
 }
 
-func (w *WebConfig) SetStdout(out io.Writer) {
-	w.stdOut = out
-}
-
-func (w *WebConfig) SetLogOut(out logger.Logger) {
-	w.logOut = out
+func (w *WebConfig) SetSource(source *plugin.Source) {
+	w.stdLog = source.StdLog
+	w.confReader = source.RawConfig
+	w.confWriter = source.RawConfig
 }
 
 func (w *WebConfig) GetName() string {
@@ -59,20 +55,13 @@ func (w *WebConfig) GetType() plugin.Type {
 	return w.typ
 }
 
-func (w *WebConfig) GetSupport() []int {
+func (w *WebConfig) GetSupport() []uint32 {
 	return w.support
 }
 
-func (w *WebConfig) ConfRead(reader io.Reader) {
-	w.confReader = reader
-}
-
-func (w *WebConfig) ConfWrite(writer io.Writer) {
-	w.confWriter = writer
-}
 
 func (w *WebConfig) Caller(s plugin.Single) {
-	w.logOut.Info(Name + ".Caller")
+	w.stdLog.Info(Name + ".Caller")
 }
 
 // Start 启动函数
@@ -88,10 +77,10 @@ func (w *WebConfig) Start(args []string) {
 	bind := flag.String("bind", "127.0.0.1:8080", "web_config绑定的ip&port")
 	flag.Parse()
 	if *sw == "off" {
-		w.logOut.Info("off")
+		w.stdLog.Info("off")
 		return
 	}
-	gin.DefaultWriter = w.stdOut
+	gin.DefaultWriter = os.Stdout
 	r := gin.Default()
 	r.GET("/config", func(context *gin.Context) {
 		cfg := config.Read(w.confReader)

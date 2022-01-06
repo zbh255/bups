@@ -6,7 +6,6 @@ import (
 	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
-	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -24,7 +23,7 @@ const (
 	Type    = plugin.Init
 )
 
-var support = []int{plugin.SupportArgs, plugin.SupportNativeStdout}
+var support = []uint32{plugin.SUPPORT_ARGS, plugin.SUPPORT_STDLOG}
 
 func New() plugin.Plugin {
 	return &Daemon{
@@ -33,13 +32,13 @@ func New() plugin.Plugin {
 }
 
 type Daemon struct {
-	stdOut io.Writer
-	sup    []int
+	stdLog logger.Logger
+	sup    []uint32
 	plugin.Plugin
 }
 
 func (d *Daemon) Caller(s plugin.Single) {
-	_, _ = d.stdOut.Write([]byte(Name + ".Caller"))
+	d.stdLog.Info(Name + ":" + "Caller")
 }
 
 func (d *Daemon) Start(args []string) {
@@ -52,13 +51,13 @@ func (d *Daemon) Start(args []string) {
 	flag.Parse()
 	switch *st {
 	case "start":
-		start(d.stdOut)
+		start(d.stdLog)
 	case "stop":
-		stop(d.stdOut)
+		stop(d.stdLog)
 	case "restart":
-		restart(d.stdOut)
+		restart(d.stdLog)
 	default:
-		_, _ = os.Stdout.Write([]byte(fmt.Sprintf("不支持的参数:%v\n", args)))
+		d.stdLog.Error(fmt.Sprintf("不支持的参数:%v\n", args))
 	}
 }
 
@@ -70,24 +69,12 @@ func (d *Daemon) GetType() plugin.Type {
 	return Type
 }
 
-func (d *Daemon) GetSupport() []int {
+func (d *Daemon) GetSupport() []uint32 {
 	return d.sup
 }
 
-func (d *Daemon) SetStdout(writer io.Writer) {
-	d.stdOut = writer
-}
-
-func (d *Daemon) SetLogOut(logger logger.Logger) {
-	return
-}
-
-func (d *Daemon) ConfRead(reader io.Reader) {
-	return
-}
-
-func (d *Daemon) ConfWrite(writer io.Writer) {
-	return
+func (d Daemon) SetSource(source *plugin.Source) {
+	d.stdLog = source.StdLog
 }
 
 func pidFileExist() bool {
@@ -100,42 +87,42 @@ func pidFileExist() bool {
 
 // 守护进程操作相关函数
 // 写入进程号到pidFile,异步启动主进程后退出
-func start(stdOut io.Writer) {
+func start(stdLog logger.Logger) {
 	// 同时只能打开一个子进程
 	if pidFileExist() {
-		_, _ = stdOut.Write([]byte("You cannot open two processes at the same time"))
+		stdLog.Error("You cannot open two processes at the same time")
 		return
 	}
 	pidFile, err := os.OpenFile(PidFile, os.O_CREATE|os.O_WRONLY, 0777)
 	if err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 	cmd := exec.Command(os.Args[0])
 	if err := cmd.Start(); err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 	// 写入pid
 	_, err = pidFile.Write([]byte(strconv.Itoa(cmd.Process.Pid)))
 	if err != nil {
-		_, _ = stdOut.Write([]byte(fmt.Sprintf("write to pid file failed: %s", err.Error())))
+		stdLog.Error(fmt.Sprintf("write to pid file failed: %s", err.Error()))
 	}
 }
-func stop(stdOut io.Writer) {
+func stop(stdLog logger.Logger) {
 	if !pidFileExist() {
-		_, _ = stdOut.Write([]byte(fmt.Sprintf("%s is not found", PidFile)))
+		stdLog.Error(fmt.Sprintf("%s is not found", PidFile))
 		return
 	}
 	// 发送信号和清理pidFile
 	pidFile, err := os.Open(PidFile)
 	if err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 	bytes, err := ioutil.ReadAll(pidFile)
 	if err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 	pid, err := strconv.Atoi(string(bytes))
@@ -144,17 +131,17 @@ func stop(stdOut io.Writer) {
 	}
 	err = syscall.Kill(pid, syscall.SIGQUIT)
 	if err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 	// 信号发送成功则清理pidFile
 	err = os.Remove(PidFile)
 	if err != nil {
-		_, _ = stdOut.Write([]byte(err.Error()))
+		stdLog.Error(err.Error())
 		return
 	}
 }
-func restart(stdOut io.Writer) {
-	stop(stdOut)
-	start(stdOut)
+func restart(stdLog logger.Logger) {
+	stop(stdLog)
+	start(stdLog)
 }
