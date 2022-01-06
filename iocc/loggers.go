@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	loggers map[string]logger.Logger
+	loggers = make(map[string]logger.Logger,3)
 )
 
 func RegisterAccessLog(writer io.Writer) {
