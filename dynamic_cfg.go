@@ -19,6 +19,12 @@ type CFG struct {
 	_fd *os.File
 }
 
+func NewCFGBuffer(fd *os.File) io.ReadWriteCloser {
+	return &CFG{
+		_fd: fd,
+	}
+}
+
 func (c *CFG) Open(fd *os.File) {
 	c.mu.Lock()
 	defer c.mu.Unlock()

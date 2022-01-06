@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/abingzo/bups/common/config"
+	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/abingzo/bups/iocc"
 	"github.com/abingzo/bups/plugins/backup"
@@ -16,23 +16,27 @@ import (
 )
 
 // LoaderPlugin 根据目录加载目录下的所有插件
-func LoaderPlugin(configFilePath string) *plugin.Context {
+// 并为Context初始化原始资源
+func LoaderPlugin() *plugin.Context {
 	// 注册插件
 	ctx := plugin.NewContext()
-
-	ctx.StdOut = os.Stdout
-	// 提供配置文件
-	cfg, err := os.OpenFile(configFilePath, os.O_RDWR, 0777)
+	// 初始化插件需要的原始资源
+	rawSource := new(plugin.Source)
+	rawSource.AccessLog = iocc.GetAccessLog()
+	rawSource.ErrorLog = iocc.GetErrorLog()
+	rawSource.StdLog = iocc.GetStdLog()
+	rawSource.Config = iocc.GetConfig()
+	// 创建配置文件的原始接口
+	configFd, err := os.OpenFile(path.PathConfigFile,os.O_RDWR,0755)
 	if err != nil {
 		panic(err)
 	}
-	defer cfg.Close()
-	// 初始化可以多次读写的配置文件接口
-	cfgE := &CFG{}
-	cfgE.Open(cfg)
-	ctx.Conf = cfgE
+	// 创建一个可重复读取的原始配置文件抽象
+	rawSource.RawConfig = NewCFGBuffer(configFd)
+
+	ctx.RawSource = rawSource
 	// 读取配置文件，决定加载那些插件
-	mainConfig  := config.Read(ctx.Conf)
+	mainConfig  := iocc.GetConfig()
 	hashTable := make(map[string]struct{},len(mainConfig.Project.Install))
 	for _,v := range mainConfig.Project.Install {
 		hashTable[v] = struct{}{}

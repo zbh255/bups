@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/abingzo/bups/common/config"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/abingzo/bups/iocc"
 	"os"
 	"os/signal"
 	"syscall"
@@ -22,7 +22,7 @@ func main() {
 	// 往iocc注册所需的组件
 	RegisterSource()
 	// 加载插件代码
-	ctx := LoaderPlugin(path.PathConfigFile)
+	ctx := LoaderPlugin()
 	// 为插件准备存放文件的文件夹，已存在则不创建
 	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
 		info, err := os.Stat(path.PathBackUpCache + "/" + v.GetName())
@@ -35,7 +35,7 @@ func main() {
 			panic(err)
 		}
 	})
-	mainConf := config.Read(ctx.Conf).Project
+	mainConf := iocc.GetConfig().Project
 	// 处理参数，如果有插件需要，则交给该插件
 	if ArgsProcess(ctx) {
 		return
