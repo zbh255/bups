@@ -2,6 +2,7 @@
 package plugin
 
 import (
+	"github.com/abingzo/bups/common/config"
 	p "plugin"
 	"sync"
 )
@@ -109,7 +110,12 @@ func (c *Context) RegisterRaw(regPlugin Plugin) {
 		case SUPPORT_ERRORLOG:
 			tmpSource.ErrorLog = c.RawSource.ErrorLog
 		case SUPPORT_CONFIG_OBJ:
-			tmpSource.Config = c.RawSource.Config
+			/*
+				Config.Plugin为原生map对象，而原生map并不支持并发读写
+				在多个插件之间共享可能会引起map并发读写的错误
+				所以，每次执行重新构造一个
+			*/
+			tmpSource.Config = config.Read(c.RawSource.RawConfig)
 		case SUPPORT_RAW_CONFIG:
 			tmpSource.RawConfig = c.RawSource.RawConfig
 		default:
