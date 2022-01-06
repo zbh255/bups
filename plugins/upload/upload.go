@@ -156,9 +156,14 @@ func (u *Upload) Start(args []string) {
 		InitCosElement(u)
 	}
 	if args == nil || len(args) == 0 {
-		err := u.cosElement.Push(BackUpFilePath)
-		if err != nil {
-			panic(err)
+		// 上传尝试3次
+		for i := 0 ; i < 3; i++{
+			err := u.cosElement.Push(BackUpFilePath)
+			if err == nil {
+				break
+			} else {
+				u.errorLog.Error(err.Error())
+			}
 		}
 		// 上传成功则打印日志
 		u.accessLog.Info("upload cos successfully")
