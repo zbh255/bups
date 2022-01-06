@@ -25,10 +25,9 @@ clean:
 	@rm -rf $(build_path)
 
 source:
-	mkdir -p $(build_path)/cache $(build_path)/plugins $(build_path)/log $(build_path)/config
-	touch $(build_path)/log/bups.log
-	touch $(build_path)/config/config.toml
-	cp -r ./config/pro/config.toml $(build_path)/config/config.toml
+	mkdir -p $(build_path)/cache $(build_path)/log
+	touch $(build_path)/config.toml
+	cp -r ./config/pro/config.toml $(build_path)/config.toml
 
 build-plugins:
 	@for str in $(wildcard ./plugins/*);\
@@ -45,7 +44,6 @@ build-plugins:
 build-darwin:export GOOS=darwin
 build-darwin:export GOARCH=amd64
 build-darwin:source
-build-darwin:build-plugins
 build-darwin:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
@@ -57,7 +55,6 @@ build-darwin:
 build-linux:export GOOS=linux
 build-linux:export GOARCH=amd64
 build-linux:source
-build-linux:build-plugins
 build-linux:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
