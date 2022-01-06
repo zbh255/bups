@@ -17,9 +17,9 @@ func TestConfWebReadWrite(t *testing.T) {
 	}
 	rawSource := new(plugin.Source)
 	rawSource.RawConfig = file
-	rawSource.StdLog = logger.New(os.Stdout,logger.PANIC)
-	rawSource.AccessLog = logger.New(os.Stdout,logger.DEBUG)
-	rawSource.ErrorLog = logger.New(os.Stderr,logger.PANIC)
+	rawSource.StdLog = logger.New(os.Stdout, logger.PANIC)
+	rawSource.AccessLog = logger.New(os.Stdout, logger.DEBUG)
+	rawSource.ErrorLog = logger.New(os.Stderr, logger.PANIC)
 
 	webConfig.SetSource(rawSource)
 	// TODO: 处理命令行参数

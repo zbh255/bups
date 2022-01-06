@@ -47,7 +47,6 @@ func TestNativeCfg(t *testing.T) {
 	t.Log(string(bytes2) == string(bytes1))
 }
 
-
 // 测试多个日志器共享一个底层文件
 func TestMultiLogger(t *testing.T) {
 	logFile, err := os.OpenFile("./test/bups.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)

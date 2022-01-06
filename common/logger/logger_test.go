@@ -11,7 +11,7 @@ type Writer struct {
 
 func (w *Writer) Write(p []byte) (n int, err error) {
 	w.nBytes = len(p)
-	return len(p),nil
+	return len(p), nil
 }
 
 func (w *Writer) Reset() {
@@ -24,7 +24,7 @@ func (w *Writer) GetWriteNBytes() int {
 
 func TestLogger(t *testing.T) {
 	writer := &Writer{}
-	logger := New(writer,ERROR)
+	logger := New(writer, ERROR)
 	logger.Info("hello world")
 	if writer.GetWriteNBytes() <= 0 {
 		t.Error("log writer failed")

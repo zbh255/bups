@@ -1,3 +1,4 @@
+//go:build linux || darwin || windows
 // +build linux darwin windows
 
 package main
@@ -27,7 +28,7 @@ func LoaderPlugin() *plugin.Context {
 	rawSource.StdLog = iocc.GetStdLog()
 	rawSource.Config = iocc.GetConfig()
 	// 创建配置文件的原始接口
-	configFd, err := os.OpenFile(path.PathConfigFile,os.O_RDWR,0755)
+	configFd, err := os.OpenFile(path.PathConfigFile, os.O_RDWR, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -36,9 +37,9 @@ func LoaderPlugin() *plugin.Context {
 
 	ctx.RawSource = rawSource
 	// 读取配置文件，决定加载那些插件
-	mainConfig  := iocc.GetConfig()
-	hashTable := make(map[string]struct{},len(mainConfig.Project.Install))
-	for _,v := range mainConfig.Project.Install {
+	mainConfig := iocc.GetConfig()
+	hashTable := make(map[string]struct{}, len(mainConfig.Project.Install))
+	for _, v := range mainConfig.Project.Install {
 		hashTable[v] = struct{}{}
 	}
 	// 注册插件
@@ -49,9 +50,9 @@ func LoaderPlugin() *plugin.Context {
 	iocc.RegisterPlugin(upload.New)
 	iocc.RegisterPlugin(web_config.New)
 	// 加载插件
-	for _,v := range iocc.GetPluginList() {
+	for _, v := range iocc.GetPluginList() {
 		tmpPlg := v()
-		_,ok := hashTable[tmpPlg.GetName()]
+		_, ok := hashTable[tmpPlg.GetName()]
 		if ok {
 			ctx.RegisterRaw(tmpPlg)
 		}

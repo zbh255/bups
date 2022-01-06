@@ -28,14 +28,14 @@ type Logger interface {
 
 func New(write io.Writer, level uint8) Logger {
 	return &LoggerImpl{
-		logger: log.New(write, "Error", log.LstdFlags | log.Lshortfile),
-		level:       level,
+		logger: log.New(write, "Error", log.LstdFlags|log.Lshortfile),
+		level:  level,
 	}
 }
 
 type LoggerImpl struct {
 	logger *log.Logger
-	level uint8
+	level  uint8
 }
 
 func (l *LoggerImpl) checkLevel(level uint8) bool {

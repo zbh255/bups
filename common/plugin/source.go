@@ -13,8 +13,8 @@ type Source struct {
 	// 原生配置文件接口
 	RawConfig io.ReadWriteCloser
 	AccessLog logger.Logger
-	ErrorLog logger.Logger
-	StdLog logger.Logger
+	ErrorLog  logger.Logger
+	StdLog    logger.Logger
 }
 
 func (s *Source) GetConfigReader() io.Reader {

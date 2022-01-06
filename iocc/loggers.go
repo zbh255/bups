@@ -7,15 +7,15 @@ import (
 )
 
 var (
-	loggers = make(map[string]logger.Logger,3)
+	loggers = make(map[string]logger.Logger, 3)
 )
 
 func RegisterAccessLog(writer io.Writer) {
-	loggers["accessLog"] = logger.New(writer,logger.DEBUG)
+	loggers["accessLog"] = logger.New(writer, logger.DEBUG)
 }
 
 func RegisterErrorLog(writer io.Writer) {
-	loggers["errorLog"] = logger.New(writer,logger.ERROR)
+	loggers["errorLog"] = logger.New(writer, logger.ERROR)
 }
 
 func GetAccessLog() logger.Logger {

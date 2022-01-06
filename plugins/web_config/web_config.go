@@ -59,7 +59,6 @@ func (w *WebConfig) GetSupport() []uint32 {
 	return w.support
 }
 
-
 func (w *WebConfig) Caller(s plugin.Single) {
 	w.stdLog.Info(Name + ".Caller")
 }

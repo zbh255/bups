@@ -17,11 +17,11 @@ func RegisterSource() {
 	config := iocc.GetConfig()
 	// 注册日志器
 	stdLog := iocc.GetStdLog()
-	accessLogFd,err := os.OpenFile(config.Project.Log.AccessLog,os.O_CREATE | os.O_WRONLY |os.O_APPEND,0755)
+	accessLogFd, err := os.OpenFile(config.Project.Log.AccessLog, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
 	if err != nil {
 		stdLog.Error(err.Error())
 	}
-	errorLogFd,err := os.OpenFile(config.Project.Log.ErrorLog,os.O_CREATE | os.O_WRONLY | os.O_APPEND,0755)
+	errorLogFd, err := os.OpenFile(config.Project.Log.ErrorLog, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
 	if err != nil {
 		stdLog.Error(err.Error())
 	}
