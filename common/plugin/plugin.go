@@ -2,9 +2,6 @@
 package plugin
 
 import (
-	"github.com/abingzo/bups/common/logger"
-	"io"
-	"os"
 	p "plugin"
 	"sync"
 )
@@ -22,16 +19,17 @@ const (
 
 // 插件需要的支持
 const (
-	// SupportArgs 命令行参数支持
-	SupportArgs int = iota
-	// SupportLogger 输出到内置日志的支持
-	SupportLogger
-	// SupportConfigRead 配置文件读取的支持
-	SupportConfigRead
-	// SupportConfigWrite 配置文件写入的支持
-	SupportConfigWrite
-	// SupportNativeStdout 共享输出缓冲区的支持
-	SupportNativeStdout
+	// SUPPORT_ARGS 命令行参数支持
+	SUPPORT_ARGS uint32 = 0x0
+	// SUPPORT_LOGGER 所有的日志支持
+	SUPPORT_LOGGER   uint32 = 0x10
+	SUPPORT_STDLOG    uint32 = 0x12
+	SUPPORT_ACCESSLOG uint32 = 0x14
+	SUPPORT_ERRORLOG  uint32 = 0x16
+	// SUPPORT_CONFIG_OBJ 所有配置文件功能的支持
+	SUPPORT_CONFIG_OBJ uint32 = 0x100
+	// SUPPORT_RAW_CONFIG 原生的配置文件接口,原型:io.ReadWriteCloser
+	SUPPORT_RAW_CONFIG uint32 = 0x110
 )
 
 // 插件接收的信号
@@ -53,15 +51,9 @@ type Plugin interface {
 	// GetType 主程序获取插件的类型
 	GetType() Type
 	// GetSupport 主程序获取插件需要的支持
-	GetSupport() []int
-	// SetStdout 设置Stdout
-	SetStdout(writer io.Writer)
-	// SetLogOut 设置日志接口
-	SetLogOut(writer logger.Logger)
-	// ConfRead 设置配置文件的读取接口
-	ConfRead(reader io.Reader)
-	// ConfWrite 设置配置文件的写入接口
-	ConfWrite(writer io.Writer)
+	GetSupport() []uint32
+	// SetSource 设置插件需要的Source
+	SetSource(source *Source)
 }
 
 // New 一些重要的，插件必需要实现的函数类型
@@ -76,12 +68,9 @@ type Context struct {
 	handle     plugins
 	init       plugins
 	bCallBack  plugins
-	support    map[string][]int
-	Conf       io.ReadWriteCloser
-	// 插件不能共享同一个fd,所以需要多个fd以满足日志
-	LogOut func() *os.File
-	// 共享的缓冲输出
-	StdOut io.Writer
+	support    map[string][]uint32
+	// 原生的资源对象
+	RawSource *Source
 	// 状态的流转，每流入一个状态时则调用对应的插件启动函数
 	state Type
 }
@@ -104,19 +93,25 @@ func (c *Context) Register(s string) {
 func (c *Context) RegisterRaw(regPlugin Plugin) {
 	c.support[regPlugin.GetName()] = regPlugin.GetSupport()
 	// 实现对应的支持
+	tmpSource := new(Source)
 	for _, v := range c.support[regPlugin.GetName()] {
 		switch v {
-		case SupportArgs:
+		case SUPPORT_ARGS:
 			c.argsPlugin = append(c.argsPlugin, regPlugin)
-		case SupportLogger:
-			log := logger.New(c.LogOut(), logger.ERROR).(*logger.LoggerImpl)
-			regPlugin.SetLogOut(log)
-		case SupportConfigRead:
-			regPlugin.ConfRead(c.Conf)
-		case SupportConfigWrite:
-			regPlugin.ConfWrite(c.Conf)
-		case SupportNativeStdout:
-			regPlugin.SetStdout(c.StdOut)
+		case SUPPORT_LOGGER:
+			tmpSource.StdLog = c.RawSource.StdLog
+			tmpSource.AccessLog = c.RawSource.AccessLog
+			tmpSource.ErrorLog = c.RawSource.ErrorLog
+		case SUPPORT_STDLOG:
+			tmpSource.StdLog = c.RawSource.StdLog
+		case SUPPORT_ACCESSLOG:
+			tmpSource.AccessLog = c.RawSource.AccessLog
+		case SUPPORT_ERRORLOG:
+			tmpSource.ErrorLog = c.RawSource.ErrorLog
+		case SUPPORT_CONFIG_OBJ:
+			tmpSource.Config = c.RawSource.Config
+		case SUPPORT_RAW_CONFIG:
+			tmpSource.RawConfig = c.RawSource.RawConfig
 		default:
 			panic("not support type")
 		}
@@ -197,6 +192,6 @@ func (c *Context) GetState() Type {
 
 func NewContext() *Context {
 	return &Context{
-		support: make(map[string][]int),
+		support: make(map[string][]uint32),
 	}
 }
