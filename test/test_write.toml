@@ -1,6 +1,8 @@
-[main]
-  install = ["backup.so", "tencnt_cos_upload.so", "web_config.so", "recover.so"]
-  lopp_time = 7200
+[project]
+  lopp_time = 0
+  [project.log]
+    access_log = ""
+    error_log = ""
 
 [plugin]
   [plugin.backup]
@@ -8,4 +10,6 @@
       log = "./log"
       other = ["other1", "other2", "other3", "other4"]
       static = "./static"
+      time_out = 3
+tatic"
       time_out = 3
