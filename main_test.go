@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/abingzo/bups/common/config"
 	"github.com/abingzo/bups/common/logger"
-	"github.com/abingzo/bups/common/plugin"
 	"io/ioutil"
 	"os"
 	"sync"
@@ -49,29 +47,10 @@ func TestNativeCfg(t *testing.T) {
 	t.Log(string(bytes2) == string(bytes1))
 }
 
-// 测试插件的加载和管理
-func TestPluginLoadAndManager(t *testing.T) {
-	ctx := LoaderPlugin("./build_release/config/config.toml")
-	ctx.SetState(plugin.Init)
-}
-
-// 测试日志器
-func TestLogger(t *testing.T) {
-	logFile, err := os.OpenFile("./build_release/log/bups.log", os.O_WRONLY|os.O_APPEND, 0755)
-	if err != nil {
-		panic(err)
-	}
-	log := logger.New(logFile, logger.ERROR)
-	stdLog := logger.New(os.Stdout, logger.ERROR)
-	log.Info("Handler")
-	log.Info("Handlers")
-	log.Info("Handlers")
-	stdLog.Info("Handler")
-}
 
 // 测试多个日志器共享一个底层文件
 func TestMultiLogger(t *testing.T) {
-	logFile, err := os.OpenFile("./build_release/log/bups.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
+	logFile, err := os.OpenFile("./test/bups.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
 	if err != nil {
 		panic(err)
 	}
