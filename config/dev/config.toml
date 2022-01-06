@@ -1,8 +1,12 @@
-[main]
+[project]
 # 安装的插件
-install = ["backup.so","tencnt_cos_upload.so","web_config.so","recover.so"]
+install = ["backup","tencnt_cos_upload","web_config","daemon"]
 # 循环的时间，即备份开始的时间
 lopp_time = 7200
+
+[project.log]
+access_log = "./log/access.log"
+error_log = "./log/error.log"
 
 # 插件的配置由plugin.name.case组成,比如plugin.backup.file_path
 [plugin.backup.file_path]

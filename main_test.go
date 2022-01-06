@@ -51,8 +51,7 @@ func TestNativeCfg(t *testing.T) {
 
 // 测试插件的加载和管理
 func TestPluginLoadAndManager(t *testing.T) {
-	ctx := LoaderPlugin(
-		"./build_release/log/bups.log", "./build_release/config/config.toml")
+	ctx := LoaderPlugin("./build_release/config/config.toml")
 	ctx.SetState(plugin.Init)
 }
 

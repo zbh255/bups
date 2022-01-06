@@ -19,8 +19,10 @@ func main() {
 			fmt.Printf("PANIC: %s\n%s", err, stack)
 		}
 	}()
-
-	ctx := LoaderPlugin(path.AppLogFilePath, path.PathConfigFile)
+	// 往iocc注册所需的组件
+	RegisterSource()
+	// 加载插件代码
+	ctx := LoaderPlugin(path.PathConfigFile)
 	// 为插件准备存放文件的文件夹，已存在则不创建
 	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
 		info, err := os.Stat(path.PathBackUpCache + "/" + v.GetName())
@@ -33,7 +35,7 @@ func main() {
 			panic(err)
 		}
 	})
-	mainConf := config.Read(ctx.Conf).Main
+	mainConf := config.Read(ctx.Conf).Project
 	// 处理参数，如果有插件需要，则交给该插件
 	if ArgsProcess(ctx) {
 		return
