@@ -122,6 +122,8 @@ func (c *Context) RegisterRaw(regPlugin Plugin) {
 			panic("not support type")
 		}
 	}
+	// Set
+	regPlugin.SetSource(tmpSource)
 	// 获取类型
 	switch regPlugin.GetType() {
 	case Init:
