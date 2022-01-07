@@ -10,7 +10,6 @@ import (
 	"github.com/abingzo/bups/plugins/backup"
 	"github.com/abingzo/bups/plugins/daemon"
 	"github.com/abingzo/bups/plugins/encrypt"
-	"github.com/abingzo/bups/plugins/recovery"
 	"github.com/abingzo/bups/plugins/upload"
 	"github.com/abingzo/bups/plugins/web_config"
 	"os"
@@ -46,7 +45,7 @@ func LoaderPlugin() *plugin.Context {
 	iocc.RegisterPlugin(backup.New)
 	iocc.RegisterPlugin(daemon.New)
 	iocc.RegisterPlugin(encrypt.New)
-	iocc.RegisterPlugin(recovery.New)
+	//iocc.RegisterPlugin(recovery.New)
 	iocc.RegisterPlugin(upload.New)
 	iocc.RegisterPlugin(web_config.New)
 	// 加载插件
