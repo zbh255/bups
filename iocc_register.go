@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/iocc"
 	"os"
 )
@@ -9,7 +8,7 @@ import (
 // RegisterSource 负责将所有用到的资源装载进iocc中
 func RegisterSource() {
 	// 注册主配置文件
-	configFile, err := os.Open(path.PathConfigFile)
+	configFile, err := os.Open(*configFilePath)
 	if err != nil {
 		panic(err)
 	}

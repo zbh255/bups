@@ -4,7 +4,6 @@
 package main
 
 import (
-	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/abingzo/bups/iocc"
 	"github.com/abingzo/bups/plugins/backup"
@@ -27,7 +26,7 @@ func LoaderPlugin() *plugin.Context {
 	rawSource.StdLog = iocc.GetStdLog()
 	rawSource.Config = iocc.GetConfig()
 	// 创建配置文件的原始接口
-	configFd, err := os.OpenFile(path.PathConfigFile, os.O_RDWR, 0755)
+	configFd, err := os.OpenFile(*configFilePath, os.O_RDWR, 0755)
 	if err != nil {
 		panic(err)
 	}
