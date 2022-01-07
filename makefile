@@ -25,7 +25,7 @@ clean:
 	@rm -rf $(build_path)
 
 source:
-	mkdir -p $(build_path)/cache $(build_path)/log
+	mkdir -p $(build_path)/cache
 	touch $(build_path)/config.toml
 	cp -r ./config/pro/config.toml $(build_path)/config.toml
 
