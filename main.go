@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
@@ -11,6 +12,11 @@ import (
 	"time"
 )
 
+// 指定一些文件存放的路径
+var (
+	configFilePath = flag.String("config",path.DEFAULT_PATH_CONFIG_FILE,"配置文件的路径")
+)
+
 func main() {
 	// 处理错误
 	defer func() {
@@ -19,18 +25,20 @@ func main() {
 			fmt.Printf("PANIC: %s\n%s", err, stack)
 		}
 	}()
+	// args parse
+	flag.Parse()
 	// 往iocc注册所需的组件
 	RegisterSource()
 	// 加载插件代码
 	ctx := LoaderPlugin()
 	// 为插件准备存放文件的文件夹，已存在则不创建
 	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
-		info, err := os.Stat(path.PathBackUpCache + "/" + v.GetName())
+		info, err := os.Stat(path.DEFAULT_PATH_BACK_UPCACHE + "/" + v.GetName())
 		if err == nil && info.IsDir() {
 			return
 		}
 		// 不存在则创建
-		err = os.MkdirAll(path.PathBackUpCache+"/"+v.GetName(), 0755)
+		err = os.MkdirAll(path.DEFAULT_PATH_BACK_UPCACHE+"/"+v.GetName(), 0755)
 		if err != nil {
 			panic(err)
 		}
