@@ -15,6 +15,14 @@ import (
 	一个正确的程序参数: ./bups --option pluginInstallList
 */
 
+// 为了更好地展示插件的类型
+var showTypeTable = map[plugin.Type]string{
+	plugin.Init: "Init",
+	plugin.BHandle: "Handle",
+	plugin.BCallBack: "Callback",
+	plugin.BCollect: "Collect",
+}
+
 // ArgsProcess 插件收到的标准参数:
 // 原参数:/User/harder/bups --plugin daemon --args '<--s start>'
 // 插件看到的:/User/harder/bups --s start
@@ -30,7 +38,7 @@ func ArgsProcess(ctx *plugin.Context) bool {
 	case "pluginInstallList":
 		tag = true
 		ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
-			fmt.Printf("Handler:%d --> PluginName:%s --> PluginType:%d\n", k, v.GetName(), v.GetType())
+			fmt.Printf("Handler:%d --> PluginName:%12s --> PluginType:%s\n", k, v.GetName(), showTypeTable[v.GetType()])
 		})
 	case "":
 		break
