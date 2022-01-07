@@ -18,8 +18,8 @@ import (
 
 const (
 	Name           = "upload"
-	DownloadCached = path.PathBackUpCache + "/download"
-	BackUpFilePath = path.PathBackUpCache + "/encrypt/backup.zip"
+	DownloadCached = path.DEFAULT_PATH_BACK_UPCACHE + "/download"
+	BackUpFilePath = path.DEFAULT_PATH_BACK_UPCACHE + "/encrypt/backup.zip"
 	Type           = plugin.BCallBack
 )
 

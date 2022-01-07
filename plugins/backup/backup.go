@@ -24,7 +24,7 @@ const (
 	Name           = "backup"
 	ScopeFilePath  = "file_path"
 	ScopeDataBase  = "database"
-	BackupFilePath = path.PathBackUpCache + "/" + Name
+	BackupFilePath = path.DEFAULT_PATH_BACK_UPCACHE + "/" + Name
 	Type           = plugin.BCollect
 )
 

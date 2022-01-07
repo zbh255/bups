@@ -19,7 +19,7 @@ import (
 
 const (
 	Name    = "daemon"
-	PidFile = path.PathBackUpCache + "/" + Name + "/" + "bups.pid"
+	PidFile = path.DEFAULT_PATH_BACK_UPCACHE + "/" + Name + "/" + "bups.pid"
 	Type    = plugin.Init
 )
 

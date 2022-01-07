@@ -15,7 +15,7 @@ import (
 const (
 	Name = "encrypt"
 	Type = plugin.BHandle
-	Self = path.PathBackUpCache + "/" + Name
+	Self = path.DEFAULT_PATH_BACK_UPCACHE + "/" + Name
 )
 
 var support = []uint32{plugin.SUPPORT_LOGGER, plugin.SUPPORT_CONFIG_OBJ}
@@ -38,7 +38,7 @@ func (e *EncryptAndArchive) SetSource(source *plugin.Source) {
 
 func (e *EncryptAndArchive) Start(args []string) {
 	// 读取backup备份好的文件
-	if err := Zip(path.PathBackUpCache+"/backup", Self+"/backup.zip"); err != nil {
+	if err := Zip(path.DEFAULT_PATH_BACK_UPCACHE+"/backup", Self+"/backup.zip"); err != nil {
 		e.errorLog.Error(err.Error())
 		panic(err)
 	} else {
