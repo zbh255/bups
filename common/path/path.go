@@ -2,7 +2,6 @@
 package path
 
 const (
-	PathConfigFile       = "./config.toml" // 配置文件的路径
-	PathBackUpCache      = "./cache"              // 缓存的数据放置文件夹
-	PathAppLocationLog   = "./log"                // 日志文件的放置文件夹
+	DEFAULT_PATH_CONFIG_FILE  = "./config.toml" // 默认的配置文件路径
+	DEFAULT_PATH_BACK_UPCACHE = "./cache"       // 默认的缓存数据放置文件夹
 )
