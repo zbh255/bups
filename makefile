@@ -41,23 +41,25 @@ build-plugins:
 	done
 	@rm -rf ./tmp.txt
 
-build-darwin:export GOOS=darwin
-build-darwin:export GOARCH=amd64
-build-darwin:source
-build-darwin:
+shell-build:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
 	@$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
 	# 移动编译之后的文件
 	@mv ./$(BINARY_MAIN_NAME) $(build_path)
 
+build-darwin:export GOOS=darwin
+build-darwin:export GOARCH=amd64
+build-darwin:source
+build-darwin:shell-build
+
 # 编译linux版本的局部变量
 build-linux:export GOOS=linux
 build-linux:export GOARCH=amd64
 build-linux:source
-build-linux:
-	@echo 'GOOS='$(GOOS)
-	@echo 'GOARCH='$(GOARCH)
-	@$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
-	# 移动编译之后的文件
-	@mv ./$(BINARY_MAIN_NAME) $(build_path)
+build-linux:shell-build
+
+build-windows:export GOOS=windows
+build-windows:export GOARCH=amd64
+build-windows:source
+build-windows:shell-build
