@@ -75,7 +75,7 @@ func (d *Daemon) GetSupport() []uint32 {
 	return d.sup
 }
 
-func (d Daemon) SetSource(source *plugin.Source) {
+func (d *Daemon) SetSource(source *plugin.Source) {
 	d.stdLog = source.StdLog
 }
 

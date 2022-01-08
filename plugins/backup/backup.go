@@ -164,6 +164,7 @@ func (b *Backup) GetSupport() []uint32 {
 
 func (b *Backup) SetSource(source *plugin.Source) {
 	b.cfg = source.Config
+	b.cfg.SetPluginName(Name)
 	b.accessLog = source.AccessLog
 	b.errorLog = source.ErrorLog
 	b.stdLog = source.StdLog
