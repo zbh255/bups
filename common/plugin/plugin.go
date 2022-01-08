@@ -12,7 +12,7 @@ type Single int
 
 // 描述插件生命周期的常量
 const (
-	Init      Type = 0 // 初始化时调用的插件
+	Init      Type = 0 // 初始化时调用的插件,程序运行周期只会调用一次
 	BCollect  Type = 1 // 需要搜集备份数据时调用的插件
 	BHandle   Type = 2 // 需要处理备份的数据时调用的插件
 	BCallBack Type = 3 // 处理完备份数据时调用的插件
