@@ -57,7 +57,7 @@ const (
 
 ### Config(配置)
 
-> `bups`使用的是Toml格式的配置文件，如果不熟悉该格式的话，可以看这里
+> `bups`使用的是Toml格式的配置文件，如果不熟悉该格式的话，可以看这里[:link:](https://toml.io/cn/v1.0.0)
 
 ```toml
 [project]
@@ -151,7 +151,7 @@ stdout_logfile_maxbytes=30MB
 ./bups --option version
 ```
 
-在`plugins`包下建立自己的包，比如`custom`，建立完成之后它们的结构看起来是这样的：`bups/plugins/custom/custom.go`，示例代码可以在这里找到:link:
+在`plugins`包下建立自己的包，比如`custom`，建立完成之后它们的结构看起来是这样的：`bups/plugins/custom/custom.go`，示例代码可以在这里找到[:link:](https://github.com/zbh255/bups/tree/dev/example)
 
 ```go
 package example
