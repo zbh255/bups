@@ -66,7 +66,7 @@ func main() {
 	// 启动初始化插件
 	ctx.SetState(plugin.Init)
 	for {
-		timer := time.After(time.Duration(mainConf.LoppTime) * time.Hour)
+		timer := time.After(time.Duration(mainConf.LoppTime) * time.Minute)
 		select {
 		case <-timer:
 			ctx.SetState(plugin.BCollect)
