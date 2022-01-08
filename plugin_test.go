@@ -169,3 +169,14 @@ func TestPluginLoad(t *testing.T) {
 		}
 	}
 }
+
+// 测试真实的plugin组件加载，并会调用它们的一些接口
+func TestTruePluginLoad(t *testing.T) {
+	err := os.Chdir("./test")
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+	RegisterSource()
+	LoaderPlugin()
+}
