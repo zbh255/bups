@@ -2,8 +2,8 @@ package web_config
 
 import (
 	"flag"
-	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/zbh255/bilog"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -31,7 +31,7 @@ func New() plugin.Plugin {
 }
 
 type WebConfig struct {
-	stdLog     logger.Logger
+	stdLog     bilog.Logger
 	name       string
 	typ        plugin.Type
 	support    []uint32
@@ -85,25 +85,25 @@ func (w *WebConfig) Start(args []string) {
 			writer.WriteHeader(http.StatusOK)
 			configData, err := ioutil.ReadAll(w.confReader)
 			if err != nil {
-				w.stdLog.Error(err.Error())
+				w.stdLog.ErrorFromString(err.Error())
 				return
 			}
 			n, err := writer.Write(configData)
 			if err != nil {
-				w.stdLog.Error(err.Error())
+				w.stdLog.ErrorFromString(err.Error())
 			}
 			if n != len(configData) {
-				w.stdLog.Error("write bytes is not equal")
+				w.stdLog.ErrorFromString("write bytes is not equal")
 			}
 		case http.MethodPost:
 			configBytes,err := ioutil.ReadAll(request.Body)
 			if err != nil {
-				w.stdLog.Error(err.Error())
+				w.stdLog.ErrorFromString(err.Error())
 				return
 			}
 			_, err = w.confWriter.Write(configBytes)
 			if err != nil {
-				w.stdLog.Error(err.Error())
+				w.stdLog.ErrorFromString(err.Error())
 				return
 			}
 		}
@@ -112,5 +112,5 @@ func (w *WebConfig) Start(args []string) {
 		Addr:              *bind,
 		Handler:           mux,
 	}
-	w.stdLog.Error(server.ListenAndServe().Error())
+	w.stdLog.ErrorFromString(server.ListenAndServe().Error())
 }

@@ -5,9 +5,9 @@ package daemon
 import (
 	"flag"
 	"fmt"
-	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/zbh255/bilog"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -34,7 +34,7 @@ func New() plugin.Plugin {
 }
 
 type Daemon struct {
-	stdLog logger.Logger
+	stdLog bilog.Logger
 	sup    []uint32
 	plugin.Plugin
 }
@@ -59,7 +59,7 @@ func (d *Daemon) Start(args []string) {
 	case "restart":
 		restart(d.stdLog)
 	default:
-		d.stdLog.Error(fmt.Sprintf("不支持的参数:%v\n", args))
+		d.stdLog.ErrorFromString(fmt.Sprintf("不支持的参数:%v\n", args))
 	}
 }
 
@@ -89,42 +89,42 @@ func pidFileExist() bool {
 
 // 守护进程操作相关函数
 // 写入进程号到pidFile,异步启动主进程后退出
-func start(stdLog logger.Logger) {
+func start(stdLog bilog.Logger) {
 	// 同时只能打开一个子进程
 	if pidFileExist() {
-		stdLog.Error("You cannot open two processes at the same time")
+		stdLog.ErrorFromString("You cannot open two processes at the same time")
 		return
 	}
 	pidFile, err := os.OpenFile(PidFile, os.O_CREATE|os.O_WRONLY, 0777)
 	if err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 	cmd := exec.Command(os.Args[0])
 	if err := cmd.Start(); err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 	// 写入pid
 	_, err = pidFile.Write([]byte(strconv.Itoa(cmd.Process.Pid)))
 	if err != nil {
-		stdLog.Error(fmt.Sprintf("write to pid file failed: %s", err.Error()))
+		stdLog.ErrorFromString(fmt.Sprintf("write to pid file failed: %s", err.Error()))
 	}
 }
-func stop(stdLog logger.Logger) {
+func stop(stdLog bilog.Logger) {
 	if !pidFileExist() {
-		stdLog.Error(fmt.Sprintf("%s is not found", PidFile))
+		stdLog.ErrorFromString(fmt.Sprintf("%s is not found", PidFile))
 		return
 	}
 	// 发送信号和清理pidFile
 	pidFile, err := os.Open(PidFile)
 	if err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 	bytes, err := ioutil.ReadAll(pidFile)
 	if err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 	pid, err := strconv.Atoi(string(bytes))
@@ -133,17 +133,17 @@ func stop(stdLog logger.Logger) {
 	}
 	err = syscall.Kill(pid, syscall.SIGQUIT)
 	if err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 	// 信号发送成功则清理pidFile
 	err = os.Remove(PidFile)
 	if err != nil {
-		stdLog.Error(err.Error())
+		stdLog.ErrorFromString(err.Error())
 		return
 	}
 }
-func restart(stdLog logger.Logger) {
+func restart(stdLog bilog.Logger) {
 	stop(stdLog)
 	start(stdLog)
 }

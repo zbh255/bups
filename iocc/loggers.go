@@ -1,35 +1,35 @@
 package iocc
 
 import (
-	"github.com/abingzo/bups/common/logger"
+	"github.com/zbh255/bilog"
 	"io"
 	"os"
 )
 
 var (
-	loggers = make(map[string]logger.Logger, 3)
+	loggers = make(map[string]bilog.Logger, 3)
 )
 
 func RegisterAccessLog(writer io.Writer) {
-	loggers["accessLog"] = logger.New(writer, logger.DEBUG)
+	loggers["accessLog"] = bilog.NewLogger(writer,bilog.DEBUG)
 }
 
 func RegisterErrorLog(writer io.Writer) {
-	loggers["errorLog"] = logger.New(writer, logger.ERROR)
+	loggers["errorLog"] = bilog.NewLogger(writer,bilog.ERROR,bilog.WithCaller())
 }
 
-func GetAccessLog() logger.Logger {
+func GetAccessLog() bilog.Logger {
 	return loggers["accessLog"]
 }
 
-func GetStdLog() logger.Logger {
+func GetStdLog() bilog.Logger {
 	return loggers["stdLog"]
 }
 
-func GetErrorLog() logger.Logger {
+func GetErrorLog() bilog.Logger {
 	return loggers["errorLog"]
 }
 
 func init() {
-	loggers["stdLog"] = logger.New(os.Stdout, logger.PANIC)
+	loggers["stdLog"] = bilog.NewLogger(os.Stdout,bilog.PANIC,bilog.WithCaller())
 }

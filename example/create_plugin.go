@@ -1,8 +1,8 @@
 package example
 
 import (
-	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/zbh255/bilog"
 	"time"
 )
 
@@ -11,7 +11,7 @@ type Simple struct {
 	name string
 	sup []uint32
 	_type plugin.Type
-	stdLog logger.Logger
+	stdLog bilog.Logger
 }
 
 // New plugin包定义的必须实现的函数，用于注册组件使用

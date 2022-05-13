@@ -1,8 +1,8 @@
 package web_config
 
 import (
-	"github.com/abingzo/bups/common/logger"
 	"github.com/abingzo/bups/common/plugin"
+	"github.com/abingzo/bups/iocc"
 	"os"
 	"strings"
 	"testing"
@@ -17,9 +17,9 @@ func TestConfWebReadWrite(t *testing.T) {
 	}
 	rawSource := new(plugin.Source)
 	rawSource.RawConfig = file
-	rawSource.StdLog = logger.New(os.Stdout, logger.PANIC)
-	rawSource.AccessLog = logger.New(os.Stdout, logger.DEBUG)
-	rawSource.ErrorLog = logger.New(os.Stderr, logger.PANIC)
+	rawSource.StdLog = iocc.GetStdLog()
+	rawSource.AccessLog = iocc.GetAccessLog()
+	rawSource.ErrorLog = iocc.GetErrorLog()
 
 	webConfig.SetSource(rawSource)
 	// TODO: 处理命令行参数

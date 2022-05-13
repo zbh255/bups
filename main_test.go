@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/abingzo/bups/common/config"
-	"github.com/abingzo/bups/common/logger"
+	"github.com/zbh255/bilog"
 	"io/ioutil"
 	"os"
 	"sync"
@@ -53,8 +53,8 @@ func TestMultiLogger(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	daemonLog := logger.New(logFile, logger.ERROR)
-	backupLog := logger.New(logFile, logger.ERROR)
+	daemonLog := bilog.NewLogger(logFile,bilog.ERROR)
+	backupLog := bilog.NewLogger(logFile,bilog.ERROR)
 	wg := sync.WaitGroup{}
 	wg.Add(400)
 	go func() {
