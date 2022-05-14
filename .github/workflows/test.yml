@@ -27,7 +27,9 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{matrix.go_version}}
-          
+      - name: Start-Mysql
+        run: sudo systemctl start mysql.service
+
       - name: Tets-Env
         run: make test-env
 
