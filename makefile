@@ -52,10 +52,12 @@ shell-build:
 
 .PHONY:test
 test:
-	make -I ./test delete_file -C ./test
-	make -I ./test create_file -C ./test
+	cd ./test ;\
+	make delete_file ;\
+	make create_file
 	$(GOCMD) test -race -v ./...
-	make -I ./test delete_file -C ./test
+	cd ./test ;\
+	make delete_file
 
 test-env:
 	pwd
@@ -64,7 +66,8 @@ test-env:
 	mysqldump -V
 
 test-clean:
-	make -I ./test delete_file -C ./test
+	cd ./test ;\
+    make delete_file
 
 build-darwin:export GOOS=darwin
 build-darwin:export GOARCH=amd64
