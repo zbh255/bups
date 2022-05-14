@@ -48,7 +48,7 @@ func (e *EncryptAndArchive) Start(args []string) {
 
 func (e *EncryptAndArchive) Caller(single plugin.Single) {
 	// 清理资源
-	if err := os.Remove(Self + "/.backup.zip"); err != nil {
+	if err := os.Remove(Self + "/backup.zip"); err != nil {
 		e.errorLog.ErrorFromString(err.Error())
 		panic(err)
 	} else {
