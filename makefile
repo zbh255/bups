@@ -61,6 +61,9 @@ test:
 
 test-env:
 	pwd
+	cd ./test ;\
+	ls -a
+	cat ./makefile
 	make -v
 	mysql -V
 	mysqldump -V
