@@ -5,6 +5,7 @@ import (
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/abingzo/bups/plugins/backup"
 	"github.com/abingzo/bups/plugins/encrypt"
+	"github.com/abingzo/bups/plugins/upload"
 	"testing"
 )
 
@@ -43,4 +44,26 @@ func TestEncryptPlugin(t *testing.T) {
 	ctx.SetState(encrypt.Type)
 	// Single
 	ep.Caller(plugin.Exit)
+}
+
+func TestUploadPlugin(t *testing.T) {
+	ctx := plugin.NewContext()
+	ud := upload.New()
+	if ud.GetName() != upload.Name {
+		t.Fatal(errors.New("backup plugin name not equal"))
+	}
+	if ud.GetType() != upload.Type {
+		t.Fatal(errors.New("backup plugin type not equal"))
+	}
+	source := LoadPluginSource()
+	ctx.RawSource = source
+	ctx.RegisterRaw(ud)
+	ctx.SetState(upload.Type)
+	// Single
+	ud.Caller(plugin.Exit)
+	//// Args Start
+	//ud.Start([]string{
+	//	"--download",
+	//	"2006-01-02 15:04:05.zip",
+	//})
 }

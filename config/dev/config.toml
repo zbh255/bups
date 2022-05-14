@@ -1,6 +1,6 @@
 [project]
 # 安装的插件
-install = ["backup","tencnt_cos_upload","web_config","daemon"]
+install = ["backup","upload","web_config","daemon","encrypt"]
 # 循环的时间，即备份开始的时间
 lopp_time = 7200
 

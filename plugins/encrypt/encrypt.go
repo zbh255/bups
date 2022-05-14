@@ -71,7 +71,7 @@ func (e *EncryptAndArchive) GetSupport() []uint32 {
 // Zip srcFile could be a single file or a directory
 // destZip必须为一个正确的文件路径，否则返回错误
 func Zip(srcFile string, destZip string) error {
-	zipfile, err := os.OpenFile(destZip, os.O_CREATE|os.O_WRONLY, 0777)
+	zipfile, err := os.OpenFile(destZip, os.O_CREATE|os.O_WRONLY, 0755)
 	if err != nil {
 		return err
 	}
