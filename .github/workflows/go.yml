@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main,dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main,dev ]
 
 jobs:
 
@@ -28,4 +28,4 @@ jobs:
       run: make build-darwin
       
     - name: Test
-      run: go test -v ./...
+      run: make test
