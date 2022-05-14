@@ -8,15 +8,19 @@ on:
 
 jobs:
 
-  Build-And-Test:
-    runs-on: ubuntu-latest
+  Build:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest,macos-latest ]
+        go_version: [ "1.17", "1.16", "1.15", "1.14" ]
+    runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v2
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.17,1.16,1.15
+        go-version: ${{matrix.go_version}}
 
     - name: Build-winodws
       run: make build-windows
@@ -27,8 +31,20 @@ jobs:
     - name: Build-darwin
       run: make build-darwin
 
+  Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go_version: [ "1.17", "1.16", "1.15", "1.14" ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{matrix.go_version}}    
     - name: Tets-Env
       run: make test-env
-      
+
     - name: Test
       run: make test

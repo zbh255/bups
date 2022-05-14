@@ -58,8 +58,9 @@ test:
 	make -I ./test delete_file -C ./test
 
 test-env:
-	mysql -h
-	mysqldump -h
+	make -v
+	mysql -v
+	mysqldump -v
 
 test-clean:
 	make -I ./test delete_file -C ./test
