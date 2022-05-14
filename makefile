@@ -67,10 +67,6 @@ test-env:
 	make -v
 	mysql -V
 	mysqldump -V
-	cat /var/log/mysqld.log | grep "temporary password" /var/log/mysqld.log
-
-set-env:
-	echo SETPASSWORD = PASSWORD('123456'); | mysql -uroot -p;\
 
 test-clean:
 	cd ./test ;\
