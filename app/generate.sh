@@ -1,0 +1,1 @@
+go build ./generate_build/main.go && ./main && rm -rf main

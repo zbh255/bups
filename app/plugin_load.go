@@ -1,22 +1,18 @@
 //go:build linux || darwin || windows
 // +build linux darwin windows
 
-package main
+package app
 
 import (
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/abingzo/bups/iocc"
-	"github.com/abingzo/bups/plugins/backup"
-	"github.com/abingzo/bups/plugins/daemon"
-	"github.com/abingzo/bups/plugins/encrypt"
-	"github.com/abingzo/bups/plugins/upload"
-	"github.com/abingzo/bups/plugins/web_config"
 	"os"
 )
 
+
 // LoaderPlugin 根据目录加载目录下的所有插件
 // 并为Context初始化原始资源
-func LoaderPlugin() *plugin.Context {
+func LoaderPlugin(path string) *plugin.Context {
 	// 注册插件
 	ctx := plugin.NewContext()
 	// 初始化插件需要的原始资源
@@ -26,7 +22,7 @@ func LoaderPlugin() *plugin.Context {
 	rawSource.StdLog = iocc.GetStdLog()
 	rawSource.Config = iocc.GetConfig()
 	// 创建配置文件的原始接口
-	configFd, err := os.OpenFile(*configFilePath, os.O_RDWR, 0755)
+	configFd, err := os.OpenFile(path, os.O_RDWR, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -40,13 +36,9 @@ func LoaderPlugin() *plugin.Context {
 	for _, v := range mainConfig.Project.Install {
 		hashTable[v] = struct{}{}
 	}
+	// TODO 解耦注册插件的代码
 	// 注册插件
-	iocc.RegisterPlugin(backup.New)
-	iocc.RegisterPlugin(daemon.New)
-	iocc.RegisterPlugin(encrypt.New)
-	//iocc.RegisterPlugin(recovery.New)
-	iocc.RegisterPlugin(upload.New)
-	iocc.RegisterPlugin(web_config.New)
+	PluginRegister()
 	// 加载插件
 	for _, v := range iocc.GetPluginList() {
 		tmpPlg := v()
@@ -57,3 +49,6 @@ func LoaderPlugin() *plugin.Context {
 	}
 	return ctx
 }
+
+// Build Plugin Register
+//go:generate sh ./generate.sh
