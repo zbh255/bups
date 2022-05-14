@@ -58,6 +58,7 @@ test:
 	make -I ./test delete_file -C ./test
 
 test-env:
+	pwd
 	make -v
 	mysql -V
 	mysqldump -V
