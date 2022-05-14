@@ -121,7 +121,7 @@ func (b *Backup) backupDatabase() {
 	cmd.Stdout = file
 	err = cmd.Run()
 	if err != nil {
-		panic(err)
+		panic(errors.New(err.Error() + fmt.Sprintf(" args: %s",strings.Join(args,""))))
 	}
 	// 打印一条备份成功的日志
 	b.accessLog.Info("backup database complete")
