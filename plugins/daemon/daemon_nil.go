@@ -9,7 +9,7 @@
 package daemon
 
 import (
-	"github.com/abingzo/bups/common/logger"
+	"github.com/zbh255/bilog"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 )
@@ -29,7 +29,7 @@ func New() plugin.Plugin {
 }
 
 type Daemon struct {
-	stdLog logger.Logger
+	stdLog bilog.Logger
 	sup    []uint32
 	plugin.Plugin
 }
