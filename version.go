@@ -8,6 +8,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/abingzo/bups/app"
 	"runtime"
 )
 
@@ -19,20 +20,11 @@ var (
 	buildDate    string
 )
 
-type Info struct {
-	Version      string `json:"version"`
-	GitBranch    string `json:"gitBranch"`
-	GitCommit    string `json:"gitCommit"`
-	GitTreeState string `json:"gitTreeState"`
-	BuildDate    string `json:"buildDate"`
-	GoVersion    string `json:"goVersion"`
-	Compiler     string `json:"compiler"`
-	Platform     string `json:"platform"`
-}
 
 // GetInfo 注意：该函数接受的是编译时-ldflags 传入的数据
-func GetInfo() *Info {
-	return &Info{
+// 返回指针是为了兼容标准库的json包
+func GetInfo() *app.Info {
+	return &app.Info{
 		Version:      version,
 		GitBranch:    gitBranch,
 		GitCommit:    gitCommit,

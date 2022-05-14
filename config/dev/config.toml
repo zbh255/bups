@@ -5,15 +5,15 @@ install = ["backup","tencnt_cos_upload","web_config","daemon"]
 lopp_time = 7200
 
 [project.log]
-access_log = "./test/access.log"
-error_log = "./test/error.log"
+access_log = "./access.log"
+error_log = "./error.log"
 
 # 插件的配置由plugin.name.case组成,比如plugin.backup.file_path
 [plugin.backup.file_path]
     # 项目根路径
-    root = "/User/harder/html"
+    root = "./"
     # 静态资源的路径
-    static = "/User/harder/static"
+    static = "./"
 [plugin.backup.database]
     driver = "mysql"
     host = "localhost"

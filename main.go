@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/abingzo/bups/app"
 	"github.com/abingzo/bups/common/path"
 	"github.com/abingzo/bups/common/plugin"
 	"github.com/abingzo/bups/iocc"
@@ -28,9 +29,9 @@ func main() {
 	// args parse
 	flag.Parse()
 	// 往iocc注册所需的组件
-	RegisterSource()
+	app.RegisterSource(*configFilePath)
 	// 加载插件代码
-	ctx := LoaderPlugin()
+	ctx := app.LoaderPlugin(*configFilePath)
 	// 为插件准备存放文件的文件夹，已存在则不创建
 	ctx.RangeAllPlugin(func(k int, v plugin.Plugin) {
 		info, err := os.Stat(path.DEFAULT_PATH_BACK_UPCACHE + "/" + v.GetName())
@@ -45,7 +46,7 @@ func main() {
 	})
 	mainConf := iocc.GetConfig().Project
 	// 处理参数，如果有插件需要，则交给该插件
-	if ArgsProcess(ctx) {
+	if app.ArgsProcess(ctx,GetInfo) {
 		return
 	}
 	// 正常启动的情况下接收信号，并将通知信号派发给插件

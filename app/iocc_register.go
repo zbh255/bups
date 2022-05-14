@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"github.com/abingzo/bups/iocc"
@@ -6,9 +6,9 @@ import (
 )
 
 // RegisterSource 负责将所有用到的资源装载进iocc中
-func RegisterSource() {
+func RegisterSource(configPath string) {
 	// 注册主配置文件
-	configFile, err := os.Open(*configFilePath)
+	configFile, err := os.Open(configPath)
 	if err != nil {
 		panic(err)
 	}

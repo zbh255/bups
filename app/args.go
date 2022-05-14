@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"encoding/json"
@@ -33,7 +33,7 @@ var option = flag.String("option", "", "应用程序选项: pluginInstallList �
 // 原参数:/User/harder/bups --plugin daemon --args '<--s start>'
 // 插件看到的:/User/harder/bups --s start
 // 有处理参数则返回true,没有处理与调度器无关的程序则返回false
-func ArgsProcess(ctx *plugin.Context) bool {
+func ArgsProcess(ctx *plugin.Context,getInfo func() *Info) bool {
 	tag := false
 
 	switch *option {
@@ -46,7 +46,7 @@ func ArgsProcess(ctx *plugin.Context) bool {
 		break
 	case "version":
 		tag = true
-		v := GetInfo()
+		v := getInfo()
 		bytes, err := json.MarshalIndent(v, "", "\t")
 		if err != nil {
 			fmt.Printf("%s", err.Error())
