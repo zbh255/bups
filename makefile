@@ -67,6 +67,10 @@ test-env:
 	make -v
 	mysql -V
 	mysqldump -V
+	echo "show databases;" | mysql -uroot -p
+
+set-env:
+	mysql -uroot -p ;\
 
 test-clean:
 	cd ./test ;\
