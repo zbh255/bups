@@ -7,7 +7,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"io/fs"
 	"os"
 	"path/filepath"
 )
@@ -34,7 +33,8 @@ func Generate(initPath string) {
 	startF := "plugins"
 	importAppend := ""
 	funcAppend := ""
-	err := filepath.Walk(initPath+startF, func(path string, info fs.FileInfo, err error) error {
+	// os.FileInfo 是为了兼容go 1.16以下的版本
+	err := filepath.Walk(initPath+startF, func(path string, info os.FileInfo, err error) error {
 		// 遍历到自己
 		if info.Name() == startF {
 			return nil
