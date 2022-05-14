@@ -44,9 +44,21 @@ build-plugins:
 shell-build:
 	@echo 'GOOS='$(GOOS)
 	@echo 'GOARCH='$(GOARCH)
-	@$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
+	# generate
+	$(GOCMD) generate ./
+	$(GOBUILD) -gcflags="all=-N -l" -o $(BINARY_MAIN_NAME) -ldflags ${ldflags} ./
 	# 移动编译之后的文件
-	@mv ./$(BINARY_MAIN_NAME) $(build_path)
+	mv ./$(BINARY_MAIN_NAME) $(build_path)
+
+.PHONY:test
+test:
+	make -I ./test delete_file -C ./test
+	make -I ./test create_file -C ./test
+	$(GOCMD) test -race -v ./...
+	make -I ./test delete_file -C ./test
+
+test-clean:
+	make -I ./test delete_file -C ./test
 
 build-darwin:export GOOS=darwin
 build-darwin:export GOARCH=amd64
