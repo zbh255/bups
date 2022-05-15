@@ -1,6 +1,6 @@
 # Bups
 
-![Go Report Card](https://goreportcard.com/badge/github.com/abingzo/bups) ![GitHub](https://img.shields.io/github/license/abingzo/bups) ![GitHub](https://badgen.net/github/release/zbh255/bups) ![GitHub](https://github.com/zbh255/bups/actions/workflows/go.yml/badge.svg)
+![Go Report Card](https://goreportcard.com/badge/github.com/abingzo/bups) ![GitHub](https://img.shields.io/github/license/abingzo/bups) ![GitHub](https://badgen.net/github/release/zbh255/bups) [![Test](https://github.com/zbh255/bups/actions/workflows/test.yml/badge.svg)](https://github.com/zbh255/bups/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/zbh255/bups/branch/dev/graph/badge.svg?token=HA19RXTWTV)](https://codecov.io/gh/zbh255/bups)
 
 ## About Bups
 
