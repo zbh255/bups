@@ -34,4 +34,7 @@ jobs:
         run: make test-env
 
       - name: Test
-        run: make test
+        run: make cover-test
+
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)

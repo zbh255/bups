@@ -59,6 +59,14 @@ test:
 	cd ./test ;\
 	make delete_file
 
+cover-test:
+	cd ./test ;\
+	make delete_file ;\
+	make create_file
+	$(GOCMD) test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
+	cd ./test ;\
+	make delete_file
+
 test-env:
 	pwd
 	cd ./test ;\
