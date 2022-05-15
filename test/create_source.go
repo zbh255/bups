@@ -20,17 +20,9 @@ func testRegisterSource() {
 	iocc.RegisterConfig(configFile)
 	config := iocc.GetConfig()
 	// 注册日志器
-	stdLog := iocc.GetStdLog()
-	accessLogFd, err := os.OpenFile(config.Project.Log.AccessLog, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
-	if err != nil {
-		stdLog.ErrorFromString(err.Error())
-	}
-	errorLogFd, err := os.OpenFile(config.Project.Log.ErrorLog, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0755)
-	if err != nil {
-		stdLog.ErrorFromString(err.Error())
-	}
-	iocc.RegisterAccessLog(accessLogFd)
-	iocc.RegisterErrorLog(errorLogFd)
+	// 测试用的日志器直接使用Stdout&StdErr
+	iocc.RegisterAccessLog(os.Stdout)
+	iocc.RegisterErrorLog(os.Stderr)
 	// 为插件创建自己对应的私有目录
 	for _,v := range config.Project.Install {
 		err = os.MkdirAll("./cache/"+v, 0755)
