@@ -44,6 +44,8 @@ func TestEncryptPlugin(t *testing.T) {
 	ctx.SetState(encrypt.Type)
 	// Single
 	ep.Caller(plugin.Exit)
+	// 重新生成文件，给测试Upload的代码使用
+	ep.Start(nil)
 }
 
 func TestUploadPlugin(t *testing.T) {
