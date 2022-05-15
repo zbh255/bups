@@ -26,6 +26,7 @@ func LoaderPlugin(path string) *plugin.Context {
 	if err != nil {
 		panic(err)
 	}
+	rawSource.RawFile = configFd
 	// 创建一个可重复读取的原始配置文件抽象
 	rawSource.RawConfig = NewCFGBuffer(configFd)
 

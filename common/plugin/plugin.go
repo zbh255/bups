@@ -31,6 +31,8 @@ const (
 	SUPPORT_CONFIG_OBJ uint32 = 0x100
 	// SUPPORT_RAW_CONFIG 原生的配置文件接口,原型:io.ReadWriteCloser
 	SUPPORT_RAW_CONFIG uint32 = 0x110
+	// SUPPORT_RAW_FILE 原生的*os.File支持
+	SUPPORT_RAW_FILE uint32 = 0x120
 )
 
 // 插件接收的信号
@@ -118,6 +120,8 @@ func (c *Context) RegisterRaw(regPlugin Plugin) {
 			tmpSource.Config = config.Read(c.RawSource.RawConfig)
 		case SUPPORT_RAW_CONFIG:
 			tmpSource.RawConfig = c.RawSource.RawConfig
+		case SUPPORT_RAW_FILE:
+			tmpSource.RawFile = c.RawSource.RawFile
 		default:
 			panic("not support type")
 		}
