@@ -161,6 +161,8 @@ func (u *Upload) Start(args []string) {
 			err := u.cosElement.Push(BackUpFilePath)
 			if err == nil {
 				break
+			} else if _,ok := err.(*os.PathError);ok {
+				panic(err)
 			} else {
 				u.errorLog.ErrorFromString(err.Error())
 			}
